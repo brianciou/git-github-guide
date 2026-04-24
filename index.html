@@ -22,34 +22,7 @@
     <a href="#footer" class="nav-btn">推薦資源</a>
   </div>
 
-  <nav class="toc">
-    <div class="toc-title">目錄</div>
-
-    <div class="toc-section-label">Part 1 — Git 入門</div>
-    <ol class="toc-git">
-      <li>分支命名的藝術</li>
-      <li>一個功能的完整生命週期</li>
-      <li>Commit 訊息怎麼寫才有用</li>
-      <li>合併的三種方式</li>
-      <li>衝突是什麼？不用怕</li>
-      <li>Stash：暫時收起來</li>
-      <li>.gitignore：哪些東西不該被記錄</li>
-      <li>跟 Claude Code 的實戰對話範本</li>
-    </ol>
-
-    <div class="toc-section-label">Part 2 — GitHub 基礎概念</div>
-    <ol class="toc-github">
-      <li>Git 跟 GitHub 的差別</li>
-      <li>Repository：GitHub 的基本單位</li>
-      <li>Push、Pull、Clone 三大操作</li>
-      <li>Fork：在你的帳號下複製一份</li>
-      <li>Contributors 是怎麼來的</li>
-      <li>Pull Request：提交你的改動</li>
-      <li>Vibe Coding 實務流程</li>
-      <li>實戰：使用 gstack 的 Skill</li>
-      <li>Fork 同步更新不會覆蓋修改嗎</li>
-    </ol>
-  </nav>
+  <nav class="floating-toc" aria-label="Table of contents"></nav>
 
   <!-- ========== PART 1: GIT ========== -->
   <div id="part-git" class="part-divider">
@@ -871,6 +844,40 @@ window.addEventListener('scroll', () => {
     navBtns[0].classList.add('active');
   }
 });
+
+// Notion-style floating TOC — auto-generated from part-divider h2 and section h2
+(function buildFloatingTOC() {
+  const toc = document.querySelector('.floating-toc');
+  if (!toc) return;
+
+  const headings = Array.from(document.querySelectorAll('.part-divider h2, .section h2'));
+  const items = headings.map((h, i) => {
+    if (!h.id) {
+      h.id = h.closest('[id]') ? h.closest('[id]').id + '-h' : 'toc-h-' + i;
+    }
+    const isPart = h.closest('.part-divider') !== null;
+    const link = document.createElement('a');
+    link.href = '#' + h.id;
+    link.className = 'floating-toc-item' + (isPart ? ' is-part' : '');
+    link.dataset.id = h.id;
+    link.innerHTML = '<span class="floating-toc-dash" aria-hidden="true"></span><span class="floating-toc-label">' + h.textContent + '</span>';
+    toc.appendChild(link);
+    return { id: h.id, link, el: h.closest('.section, .part-divider') || h };
+  });
+
+  function updateActive() {
+    const y = window.scrollY + window.innerHeight * 0.3;
+    let activeIdx = 0;
+    items.forEach((item, i) => {
+      if (item.el.offsetTop <= y) activeIdx = i;
+    });
+    items.forEach((item, i) => {
+      item.link.classList.toggle('is-active', i === activeIdx);
+    });
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+})();
 </script>
 </body>
 </html>

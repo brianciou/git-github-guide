@@ -1032,3 +1032,102 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
   .toc { padding: 28px 24px; }
   .sticky-nav { margin: 0 -20px 32px; padding-left: 20px; padding-right: 20px; }
 }
+
+/* ============================================================
+   Floating TOC (Notion-style) — right-edge dashes expand on hover
+   ============================================================ */
+.floating-toc {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 10px 6px;
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.floating-toc::-webkit-scrollbar { display: none; }
+
+.floating-toc-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 3px 0;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  transition: color 0.2s ease-out;
+  max-width: 260px;
+}
+
+.floating-toc-dash {
+  display: inline-block;
+  width: 16px;
+  height: 1.5px;
+  background: var(--muted);
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: width 0.2s ease-out, background-color 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.floating-toc-item.is-part .floating-toc-dash {
+  width: 22px;
+  height: 2px;
+  opacity: 0.75;
+}
+
+.floating-toc-item.is-active .floating-toc-dash,
+.floating-toc-item:hover .floating-toc-dash {
+  width: 26px;
+  background: var(--ink);
+  opacity: 1;
+}
+
+.floating-toc-label {
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+  pointer-events: none;
+  white-space: normal;
+  text-align: right;
+  word-break: break-word;
+}
+
+.floating-toc:hover .floating-toc-label,
+.floating-toc:focus-within .floating-toc-label {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.floating-toc:hover .floating-toc-item,
+.floating-toc:focus-within .floating-toc-item {
+  color: var(--ink);
+}
+
+.floating-toc-item.is-active {
+  color: var(--ink);
+  font-weight: 600;
+}
+.floating-toc-item.is-part {
+  color: var(--ink);
+  font-weight: 600;
+  margin-top: 6px;
+}
+.floating-toc-item.is-part:first-child { margin-top: 0; }
+
+.floating-toc-item:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .floating-toc { display: none; }
+}
