@@ -845,24 +845,42 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Notion-style floating TOC — auto-generated from part-divider h2 and section h2
+// Notion-style floating TOC — rail (dashes) + panel (full list on hover)
 (function buildFloatingTOC() {
   const toc = document.querySelector('.floating-toc');
   if (!toc) return;
 
+  const rail = document.createElement('div');
+  rail.className = 'floating-toc-rail';
+  const panel = document.createElement('div');
+  panel.className = 'floating-toc-panel';
+  const panelTitle = document.createElement('div');
+  panelTitle.className = 'floating-toc-panel-title';
+  panelTitle.textContent = 'CONTENTS';
+  panel.appendChild(panelTitle);
+  toc.appendChild(rail);
+  toc.appendChild(panel);
+
   const headings = Array.from(document.querySelectorAll('.part-divider h2, .section h2'));
   const items = headings.map((h, i) => {
-    if (!h.id) {
-      h.id = h.closest('[id]') ? h.closest('[id]').id + '-h' : 'toc-h-' + i;
-    }
+    if (!h.id) h.id = 'toc-h-' + i;
     const isPart = h.closest('.part-divider') !== null;
-    const link = document.createElement('a');
-    link.href = '#' + h.id;
-    link.className = 'floating-toc-item' + (isPart ? ' is-part' : '');
-    link.dataset.id = h.id;
-    link.innerHTML = '<span class="floating-toc-dash" aria-hidden="true"></span><span class="floating-toc-label">' + h.textContent + '</span>';
-    toc.appendChild(link);
-    return { id: h.id, link, el: h.closest('.section, .part-divider') || h };
+
+    const dash = document.createElement('a');
+    dash.href = '#' + h.id;
+    dash.className = 'floating-toc-dash' + (isPart ? ' is-part' : '');
+    dash.dataset.id = h.id;
+    dash.setAttribute('aria-label', h.textContent);
+    rail.appendChild(dash);
+
+    const panelItem = document.createElement('a');
+    panelItem.href = '#' + h.id;
+    panelItem.className = 'floating-toc-panel-item' + (isPart ? ' is-part' : '');
+    panelItem.dataset.id = h.id;
+    panelItem.textContent = h.textContent;
+    panel.appendChild(panelItem);
+
+    return { id: h.id, dash, panelItem, el: h.closest('.section, .part-divider') || h };
   });
 
   function updateActive() {
@@ -872,7 +890,8 @@ window.addEventListener('scroll', () => {
       if (item.el.offsetTop <= y) activeIdx = i;
     });
     items.forEach((item, i) => {
-      item.link.classList.toggle('is-active', i === activeIdx);
+      item.dash.classList.toggle('is-active', i === activeIdx);
+      item.panelItem.classList.toggle('is-active', i === activeIdx);
     });
   }
   window.addEventListener('scroll', updateActive, { passive: true });

@@ -1034,112 +1034,125 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
 }
 
 /* ============================================================
-   Floating TOC (Notion-style) — left-edge uniform dashes that
-   expand into labels on hover. All dashes share the same length
-   so they align cleanly; active/part state shifts color only.
+   Floating TOC (Notion/Substack-style)
+   - Rail: always-visible evenly spaced dashes on the left
+   - Panel: full-height menu card that appears on hover
    ============================================================ */
 .floating-toc {
   position: fixed;
   top: 50%;
-  left: 20px;
+  left: 16px;
   transform: translateY(-50%);
   z-index: 50;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-  padding: 10px 6px;
-  max-height: 80vh;
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-.floating-toc::-webkit-scrollbar { display: none; }
-
-.floating-toc-item {
-  display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  padding: 1.5px 0;
-  color: var(--muted);
-  text-decoration: none;
-  font-family: 'Inter', 'Noto Sans TC', sans-serif;
-  font-size: 0.78rem;
-  line-height: 1.35;
-  transition: color 0.2s ease-out;
-  max-width: 260px;
 }
 
-/* All dashes identical — only color/opacity changes for state */
+/* Rail — always-visible dash column */
+.floating-toc-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 6px;
+}
 .floating-toc-dash {
   display: block;
   width: 18px;
   height: 1.5px;
   background: var(--ink);
   opacity: 0.3;
-  flex-shrink: 0;
-  transition: background-color 0.2s ease-out, opacity 0.2s ease-out;
+  border-radius: 1px;
+  transition: opacity 0.2s ease-out, background-color 0.2s ease-out;
 }
+.floating-toc-dash.is-part { opacity: 0.55; }
+.floating-toc-dash.is-active,
+.floating-toc-dash:hover { opacity: 1; }
 
-.floating-toc-item.is-part .floating-toc-dash {
-  opacity: 0.55;
-}
-
-.floating-toc-item.is-active .floating-toc-dash,
-.floating-toc-item:hover .floating-toc-dash {
-  opacity: 1;
-}
-
-.floating-toc-label {
+/* Panel — hidden by default, fades in on .floating-toc hover */
+.floating-toc-panel {
+  position: absolute;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-8px);
+  min-width: 280px;
+  max-width: 340px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 22px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
   opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.18s ease-out, transform 0.18s ease-out;
   pointer-events: none;
-  white-space: normal;
-  text-align: left;
-  word-break: break-word;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  scrollbar-width: thin;
 }
-
-.floating-toc:hover .floating-toc-label,
-.floating-toc:focus-within .floating-toc-label {
+.floating-toc:hover .floating-toc-panel,
+.floating-toc:focus-within .floating-toc-panel {
   opacity: 1;
-  transform: translateX(0);
   pointer-events: auto;
+  transform: translateY(-50%) translateX(0);
 }
 
-.floating-toc:hover .floating-toc-item,
-.floating-toc:focus-within .floating-toc-item {
+.floating-toc-panel-title {
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--muted);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
 }
 
-.floating-toc-item.is-active {
+.floating-toc-panel-item {
+  display: block;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 8px 6px 14px;
+  margin: 1px 0;
+  border-radius: 4px;
+  position: relative;
+  transition: background-color 0.15s ease-out, color 0.15s ease-out;
+}
+.floating-toc-panel-item:hover {
+  background: var(--accent-light);
+  color: var(--ink);
+}
+
+/* Part — thick left bar indicator, strong ink color */
+.floating-toc-panel-item.is-part {
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 10px;
+  padding-left: 14px;
+}
+.floating-toc-panel-item.is-part:first-of-type { margin-top: 0; }
+.floating-toc-panel-item.is-part::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: var(--ink);
+  border-radius: 1px;
+}
+
+/* Active item — darker color, subtle highlighted bg */
+.floating-toc-panel-item.is-active {
   color: var(--ink);
   font-weight: 600;
+  background: var(--accent-light);
 }
-/* Part titles — big label, uppercase, tracked, stronger weight */
-.floating-toc-item.is-part {
-  color: var(--ink);
-  font-weight: 700;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-top: 12px;
-  padding-bottom: 3px;
-}
-.floating-toc-item.is-part:first-child { margin-top: 0; }
-.floating-toc-item.is-part + .floating-toc-item { margin-top: 3px; }
-
-/* Section titles (default) — indent label slightly to show hierarchy */
-.floating-toc-item:not(.is-part) .floating-toc-label {
-  padding-left: 10px;
-  font-size: 0.78rem;
-  letter-spacing: 0;
-  text-transform: none;
-  font-weight: 400;
-}
-
-.floating-toc-item:hover {
-  color: var(--ink);
+.floating-toc-panel-item.is-active::before {
+  background: var(--accent);
 }
 
 @media (max-width: 900px) {
