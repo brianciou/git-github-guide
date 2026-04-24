@@ -1034,18 +1034,20 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
 }
 
 /* ============================================================
-   Floating TOC (Notion-style) — right-edge dashes expand on hover
+   Floating TOC (Notion-style) — left-edge uniform dashes that
+   expand into labels on hover. All dashes share the same length
+   so they align cleanly; active/part state shifts color only.
    ============================================================ */
 .floating-toc {
   position: fixed;
   top: 50%;
-  right: 20px;
+  left: 20px;
   transform: translateY(-50%);
   z-index: 50;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
+  align-items: flex-start;
+  gap: 2px;
   padding: 10px 6px;
   max-height: 80vh;
   overflow-y: auto;
@@ -1056,9 +1058,9 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
 .floating-toc-item {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  padding: 3px 0;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 4px 0;
   color: var(--muted);
   text-decoration: none;
   font-family: 'Inter', 'Noto Sans TC', sans-serif;
@@ -1068,36 +1070,33 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
   max-width: 260px;
 }
 
+/* All dashes identical — only color/opacity changes for state */
 .floating-toc-dash {
-  display: inline-block;
-  width: 16px;
+  display: block;
+  width: 18px;
   height: 1.5px;
-  background: var(--muted);
-  opacity: 0.5;
+  background: var(--ink);
+  opacity: 0.3;
   flex-shrink: 0;
-  transition: width 0.2s ease-out, background-color 0.2s ease-out, opacity 0.2s ease-out;
+  transition: background-color 0.2s ease-out, opacity 0.2s ease-out;
 }
 
 .floating-toc-item.is-part .floating-toc-dash {
-  width: 22px;
-  height: 2px;
-  opacity: 0.75;
+  opacity: 0.55;
 }
 
 .floating-toc-item.is-active .floating-toc-dash,
 .floating-toc-item:hover .floating-toc-dash {
-  width: 26px;
-  background: var(--ink);
   opacity: 1;
 }
 
 .floating-toc-label {
   opacity: 0;
-  transform: translateX(6px);
+  transform: translateX(-6px);
   transition: opacity 0.18s ease-out, transform 0.18s ease-out;
   pointer-events: none;
   white-space: normal;
-  text-align: right;
+  text-align: left;
   word-break: break-word;
 }
 
@@ -1110,7 +1109,7 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
 
 .floating-toc:hover .floating-toc-item,
 .floating-toc:focus-within .floating-toc-item {
-  color: var(--ink);
+  color: var(--muted);
 }
 
 .floating-toc-item.is-active {
@@ -1120,7 +1119,7 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
 .floating-toc-item.is-part {
   color: var(--ink);
   font-weight: 600;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 .floating-toc-item.is-part:first-child { margin-top: 0; }
 
