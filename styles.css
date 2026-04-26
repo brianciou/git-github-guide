@@ -673,6 +673,12 @@ body {
   padding-left: 32px;
   padding-right: 32px;
   z-index: 40;
+  display: block;
+}
+.sticky-nav-pills {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 .nav-btn {
   border-radius: 9999px;
@@ -687,7 +693,25 @@ body {
   min-height: 40px;
   display: inline-flex;
   align-items: center;
+  gap: 8px;
 }
+/* Chevron — desktop hidden, mobile shown */
+.nav-chevron {
+  display: none;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform 0.22s ease-out;
+}
+.nav-btn.is-expanded .nav-chevron {
+  transform: rotate(-135deg) translate(-1px, -1px);
+}
+
+/* Mobile sub-section dropdown panel */
+.sticky-nav-submenu { display: none; }
+.sticky-nav-submenu[hidden] { display: none !important; }
 .nav-btn:hover {
   background: var(--ink);
   color: var(--paper);
@@ -698,10 +722,33 @@ body {
   color: var(--ink);
   border-color: var(--ink);
 }
-.nav-btn.active::before {
-  content: "●";
-  margin-right: 8px;
-  font-size: 0.6em;
+
+/* Inner pieces: anchor for text-jump, button for chevron-toggle.
+   Both transparent — pill looks like a single unit, no divider, no extra padding. */
+.nav-btn-link {
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+}
+.nav-btn-toggle {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  cursor: pointer;
+  display: none; /* desktop: hidden */
+  align-items: center;
+  font: inherit;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-btn-toggle:focus-visible {
+  outline: 1px dashed currentColor;
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* TOC */
@@ -777,7 +824,8 @@ body {
 .part-divider p { color: var(--sage); font-family: 'DM Serif Display','Noto Serif TC',serif; font-style: italic; font-size: 1.1rem; margin-top: 10px; }
 
 /* SECTIONS */
-.section { margin-bottom: 72px; }
+.section { margin-bottom: 72px; scroll-margin-top: 90px; }
+.part-divider { scroll-margin-top: 80px; }
 .section-number {
   display: inline-block;
   font-family: 'Inter', sans-serif;
@@ -910,7 +958,33 @@ code {
   border-radius: 24px;
   padding: 36px 28px;
 }
-.diagram-caption { color: var(--muted); font-style: italic; font-family: 'DM Serif Display','Noto Serif TC',serif; }
+.diagram svg { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+.diagram-svg-mobile { display: none; }
+.diagram-caption { color: var(--muted); font-style: italic; font-family: 'DM Serif Display','Noto Serif TC',serif; margin-top: 14px; text-align: center; }
+
+/* 抽出 SVG 的重點提示框，改用 HTML 讓文字能正常 reflow */
+.diagram-note {
+  margin: 24px auto 0;
+  max-width: 520px;
+  padding: 18px 24px;
+  background: var(--sage);
+  border: 1px solid var(--ink);
+  border-radius: 16px;
+  text-align: center;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.diagram-note strong { display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.95rem; }
+.diagram-note span { color: var(--ink); opacity: 0.7; font-size: 0.88rem; }
+
+@media (max-width: 600px) {
+  .diagram { padding: 24px 16px; }
+  .diagram-svg-desktop { display: none; }
+  .diagram-svg-mobile { display: block; }
+  .diagram-note { padding: 14px 18px; }
+  .diagram-note strong { font-size: 0.92rem; }
+  .diagram-note span { font-size: 0.85rem; }
+}
 
 /* Key point */
 .key-point {
@@ -1023,14 +1097,91 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
 }
 
 @media (max-width: 600px) {
+  /* 防止任何寬元素把整頁撐橫向捲動 */
+  html, body { overflow-x: clip; }
+
   .page-wrapper { padding: 56px 20px 80px; }
   .page-wrapper::before { top: 20px; right: 20px; font-size: 1.6rem; }
-  .hero h1 { font-size: 2.4rem; }
+  .hero h1 { font-size: 2.2rem; line-height: 1.05; }
   .hero-sub { font-size: 1.05rem; }
   .part-divider { padding: 44px 24px; margin: 64px 0 48px; }
   .part-divider h2 { font-size: 1.9rem; }
   .toc { padding: 28px 24px; }
-  .sticky-nav { margin: 0 -20px 32px; padding-left: 20px; padding-right: 20px; }
+
+  /* Sticky nav：pills 在窄螢幕橫向滾動，不擠破版面 */
+  .sticky-nav {
+    margin: 0 -20px 32px;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sticky-nav::-webkit-scrollbar { display: none; }
+  .nav-btn { flex-shrink: 0; font-size: 0.82rem; padding: 8px 14px; min-height: 36px; }
+
+  /* Naming table：讓表格自己橫向滾動，不要撐破視窗 */
+  .naming-table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 16px;
+  }
+  .naming-table th,
+  .naming-table td { padding: 12px 14px; font-size: 0.9rem; }
+  .naming-table th { font-size: 0.7rem; padding: 12px 14px; }
+
+  /* 避免左側 floating TOC rail 遮到內容（留安全距離） */
+  .floating-toc { left: 6px; }
+
+  /* 手機：顯示 chevron toggle 按鈕 + sub-section 下拉面板 */
+  .nav-btn-toggle { display: inline-flex; }
+  .nav-chevron { display: inline-block; }
+
+  .sticky-nav-submenu {
+    display: block;
+    margin: 14px -20px -14px;
+    padding: 6px 0;
+    border-top: 1px solid var(--ink);
+    background: var(--paper);
+    max-height: 60vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    animation: submenu-slide 0.18s ease-out;
+  }
+  @keyframes submenu-slide {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .submenu-item {
+    display: block;
+    padding: 12px 24px;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.4;
+    border-bottom: 1px solid rgba(31, 58, 46, 0.1);
+    position: relative;
+    padding-left: 40px;
+  }
+  .submenu-item:last-child { border-bottom: none; }
+  .submenu-item::before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    width: 8px;
+    height: 1.5px;
+    background: var(--ink);
+    opacity: 0.4;
+    transform: translateY(-50%);
+  }
+  .submenu-item:active,
+  .submenu-item.is-active { background: var(--aged); }
+  .submenu-item.is-active::before { opacity: 1; width: 12px; }
 }
 
 /* ============================================================
@@ -1063,9 +1214,14 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
   background: var(--ink);
   opacity: 0.3;
   border-radius: 1px;
-  transition: opacity 0.2s ease-out, background-color 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
 }
-.floating-toc-dash.is-part { opacity: 0.55; }
+/* Part 大標的 dash 略長，僅以長度建立階層；顏色與 Section 一致 */
+.floating-toc-dash.is-part {
+  width: 18px;
+  height: 2px;
+}
+/* Active / hover 只變色（不變長度） */
 .floating-toc-dash.is-active,
 .floating-toc-dash:hover { opacity: 1; }
 
@@ -1088,6 +1244,17 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
   pointer-events: none;
   transition: opacity 0.2s ease-out, transform 0.2s ease-out;
   scrollbar-width: thin;
+}
+/* 透明 hover bridge — 補上 rail 與 panel 之間的縫隙，
+   滑鼠橫跨時不會誤觸發 mouseleave 而把選單關掉 */
+.floating-toc-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -40px;
+  width: 40px;
+  pointer-events: auto;
 }
 .floating-toc:hover .floating-toc-panel,
 .floating-toc:focus-within .floating-toc-panel {
