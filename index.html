@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Git & GitHub 學習指南｜給 Vibe Coder 的白話教學</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Git & Github 新手入門指南｜給 Vibe Coder 的對話式教學</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:ital,wght@0,400;0,600;0,700;0,900;1,700;1,900&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="page-wrapper">
 
   <header class="hero">
-    <div class="hero-label">給 Vibe Coder 的完整學習資源</div>
-    <h1>Git <span>&</span> GitHub<br>白話文學習指南</h1>
-    <p class="hero-sub">從版本控制到雲端協作，搭配 Claude Code 讓你不用背指令也能上手</p>
+    <div class="hero-label">給 Vibe Coder 的學習資源</div>
+    <h1>Git <span>&</span> Github<br>新手入門指南</h1>
+    <p class="hero-sub">從基本概念開始，一步步掌握版本控制與雲端協作</p>
   </header>
 
   <div class="sticky-nav">
@@ -41,29 +41,252 @@
   <div id="part-git" class="part-divider">
     <div class="part-label">Part 1</div>
     <h2>Git 入門</h2>
-    <p>從分支命名到合併策略，用白話文說給你聽</p>
+    <p>從建立 Repo 到合併分支，學會存檔、嘗試、安心倒帶</p>
   </div>
 
 <!-- Hero -->
-  
+
 
   <!-- TOC -->
-  
+
 
   <!-- Section 1 -->
   <section class="section">
     <div class="section-number">01</div>
-    <h2>分支命名的藝術</h2>
+    <h2>Git 的基本概念</h2>
 
-    <p>原文提到分支就像「不同的時間軸」，這個比喻非常好。但當你的時間軸越來越多，好的命名就變得很重要——就像你電腦裡的資料夾，如果全都叫「新資料夾」，三天後你自己也找不到東西。</p>
+    <p>用 Claude Code 做 Vibe Coding 時，你一定遇過這種情況：好不容易把功能調到滿意了，結果下一輪對話就不小心改壞了什麼，卻怎麼也回不到剛才正常的狀態。</p>
+
+    <p>這時候你可能會想，如果有一個「時光機」，能讓我隨時回到任何一個正常運作的版本就好了。這個時光機，就是 <strong>Git</strong>。</p>
+
+    <p>對 Vibe Coder 來說，學 Git 最大的好處是：你可以放心地讓 Claude Code 去嘗試各種改動，因為你知道任何時候都能「倒帶」回安全的版本。下面先認識四個最核心的名詞，後面所有章節都會回來用到它們。</p>
+
+    <h3>Repository：你的專案資料夾</h3>
+    <p>Repository（簡稱 Repo）就是被 Git 管理的專案資料夾。當你在一個資料夾裡執行 <code>git init</code>，這個資料夾就變成了一個 Repo，從這一刻起，Git 就會開始追蹤裡面所有檔案的變動。</p>
 
     <div class="analogy">
       <div class="analogy-label">生活比喻</div>
-      分支命名就像幫便利貼寫標題。你不會只寫「東西」，你會寫「週五會議待辦」。分支名稱也一樣，要讓未來的你（或同事）一眼就知道這條時間軸在做什麼。
+      可以把 Repo 想成 Google 文件，每次改動都會留下版本紀錄，未來可以隨時翻到「上禮拜五的版本」或「昨天加完那段話的版本」。Repo 就是把你整個專案資料夾都加上這層版本紀錄能力。
     </div>
 
-    <h3>常見的命名規則</h3>
-    <p>業界有一套約定俗成的「前綴」分類法，就像資料夾前面的標籤：</p>
+    <div class="prompt">
+      <div class="prompt-label">對 Claude Code 說</div>
+      <p>「幫我在這個專案資料夾建立 Git」<br>→ Claude Code 會執行 <code>git init</code>，把資料夾變成 Repo</p>
+    </div>
+
+    <h3>Commit：儲存當下的進度點</h3>
+    <p>Commit 是 Git 裡最核心的動作，就是把目前的改動儲存成一個紀錄點。每次 commit，Git 都會把專案當下的狀態記下來，附上你寫的說明訊息和時間戳記，未來隨時可以回到這個紀錄點，從這裡重新再往下做。</p>
+
+    <div class="analogy">
+      <div class="analogy-label">生活比喻</div>
+      Commit 就像遊戲裡的手動存檔。你不會每走一步就存，但會在打完 Boss、拿到重要道具時存一下。專案也一樣，每完成一個功能、修好一個 Bug，就值得存一個進度點。
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-label">對 Claude Code 說</div>
+      <p>「這個功能做好了，幫我儲存進度」<br>→ Claude Code 會把改動加進暫存區（<code>git add</code>，像把要存的東西先放進購物車），再建立一個 commit 完成存檔</p>
+    </div>
+
+    <p>有了 commit 之後，搭配下面這幾句對話就能輕鬆檢查改動、查看歷史、還原狀態：</p>
+
+    <div class="prompt">
+      <div class="prompt-label">確認改了什麼</div>
+      <p>「幫我看一下從上次存檔之後，我改了哪些東西」</p>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-label">回顧過去進度</div>
+      <p>「列出最近幾次的存檔紀錄，我想看看這幾天做了什麼」</p>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-label">還原特定檔案</div>
+      <p>「我剛才改壞了首頁的樣式，幫我把首頁的樣式檔案還原到上一次存檔的版本」</p>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-label">把整個專案倒回去</div>
+      <p>「我好像把整個專案搞亂了，幫我還原到今天早上的狀態」</p>
+    </div>
+
+    <h3>Branch：開一條平行的開發路線</h3>
+    <p>Branch（分支）讓你從主線上分岔出一條路徑，可以在上面做實驗或開發新功能，而不影響主線的穩定版本。等嘗試完成沒問題後，再合併回主線。</p>
+
+    <div class="analogy">
+      <div class="analogy-label">生活比喻</div>
+      分支就像在文件上按「建立副本」，副本上怎麼改都不會動到原始版本。改得滿意就把副本內容合併回去；不滿意直接刪掉副本，原始版本還是完好如初。
+    </div>
+
+    <p>分支的細節（什麼時候開、怎麼命名、怎麼合併）會留到 Section 03、04 展開。</p>
+
+    <h3>本地 vs 遠端</h3>
+    <p>Git 的操作都是在你自己的電腦上進行的，這就是「本地端」（Local）。GitHub 這類平台則是「遠端」（Remote），讓你可以把專案備份到雲端、跟別人協作，或者純粹當作異地備份。</p>
+
+    <div class="key-point">
+      <div class="key-point-title">一個人的 Vibe Coding 專案</div>
+      對單人專案來說，遠端最大的價值就是備份。即使你還沒把專案推到 GitHub，本地的 Git 就能幫你做好版本控制。GitHub 的部分留到 Part 2 再展開。
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- Section 2 -->
+  <section class="section">
+    <div class="section-number">02</div>
+    <h2>寫好 Commit 訊息，讓每次存檔都有意義</h2>
+
+    <p>知道 Commit 是什麼之後，接下來聊一個很容易被忽略，但其實很重要的事：commit 訊息要怎麼寫。</p>
+
+    <div class="analogy">
+      <div class="analogy-label">生活比喻</div>
+      Commit 訊息就像 Google Calendar 上的事件名稱。你不會把事件寫成「開會」，而會寫成「跟客戶討論 Logo 定稿」。好的 commit 訊息也是一樣，未來回頭看時，光看訊息就能知道當時是為了什麼原因做了什麼改動。
+    </div>
+
+    <h3>用 Conventional Commits 格式來書寫</h3>
+    <p><strong>Conventional Commits</strong> 是一種被廣泛採用的 commit 訊息格式，做法是在訊息前面加上一個「類型」標籤，讓每筆紀錄的意圖一目了然：</p>
+
+    <div class="code-block">
+      <span class="comment"># 格式</span><br>
+      <span class="cmd">類型</span>: <span class="string">簡短描述這次改了什麼</span><br><br>
+      <span class="comment"># 實際範例</span><br>
+      <span class="cmd">feat</span>: <span class="string">新增深色模式切換按鈕</span><br>
+      <span class="cmd">fix</span>: <span class="string">修復手機版選單無法關閉的問題</span><br>
+      <span class="cmd">style</span>: <span class="string">調整首頁標題的字體大小和間距</span><br>
+      <span class="cmd">docs</span>: <span class="string">更新 README 的安裝說明</span><br>
+      <span class="cmd">refactor</span>: <span class="string">簡化導覽列的程式碼結構</span>
+    </div>
+
+    <p><code>feat</code> 是新功能、<code>fix</code> 是修 Bug、<code>style</code> 是樣式調整、<code>docs</code> 是文件更新、<code>refactor</code> 是重構程式碼。光看前綴就能快速掃過歷史紀錄，知道每次改動的性質。</p>
+
+    <div class="prompt">
+      <div class="prompt-label">對 Claude Code 說</div>
+      <p>「幫我用 Conventional Commits 格式儲存」<br>→ Claude Code 會自動分析改動內容，產出合適的訊息，你再檢查一下訊息有沒有表達正確的意思就好</p>
+    </div>
+
+    <h3>把偏好寫進 CLAUDE.md</h3>
+    <p>不過，每次都要口頭提醒 Claude Code 用什麼格式，感覺不是很聰明。我們可以把這種每次都要重複講的偏好設定，寫進 <code>CLAUDE.md</code> 裡。</p>
+
+    <p>CLAUDE.md 是放在專案根目錄的設定檔，Claude Code 每次啟動時都會自動讀取。可以把它想成是給 Claude Code 的「工作說明書」，commit 訊息要用什麼格式、協作方式等，都可以寫在裡面當作 Claude Code 的指引。</p>
+
+    <div class="code-block">
+      <span class="comment"># CLAUDE.md 範例</span><br><br>
+      <span class="cmd">## Git 規範</span><br>
+      <span class="string">- commit 訊息請使用 Conventional Commits 格式</span><br>
+      <span class="string">- commit 訊息用英文撰寫</span><br>
+      <span class="string">- 分支命名使用 前綴/描述 格式（如 feature/xxx, fix/xxx）</span><br><br>
+      <span class="cmd">## 開發偏好</span><br>
+      <span class="string">- 使用繁體中文跟我溝通</span><br>
+      <span class="string">- 改動前先跟我確認方向</span>
+    </div>
+
+    <div class="tip">
+      設定好之後，未來只要說「幫我儲存」，Claude Code 就會自動用 Conventional Commits 格式來寫 commit 訊息，不需要每次再重新覆述一次。
+    </div>
+  </section>
+
+  <hr class="sep">
+
+  <!-- Section 3 -->
+  <section class="section">
+    <div class="section-number">03</div>
+    <h2>透過 Branch 放心做嘗試，不用擔心影響主線</h2>
+
+    <p>當你的專案已經有一個穩定運作的版本，這時候想加新功能，你會怎麼做呢？</p>
+
+    <p>直接在原本的程式碼上改，當然可以。但如果改到一半發現方向不對，或者改壞了其他功能，要回頭就會比較麻煩。<strong>分支（Branch）就是為了解決這個問題而存在的。</strong></p>
+
+    <p>因此在 Git 預設的主分支（main）上，我們應該永遠保持可以正常運作的版本，新功能的開發或嘗試都在分支上進行。這樣一來，就能放心地在分支上大膽嘗試各種想法，不用擔心會影響到 main 上已經穩定的成果。</p>
+
+    <div class="prompt">
+      <div class="prompt-label">對 Claude Code 說</div>
+      <p>「我想試試看把整個配色換掉，但不確定效果好不好，幫我開一個新的分支來嘗試」</p>
+    </div>
+
+    <h3>一個功能的完整生命週期</h3>
+    <p>功能分支的生命週期：從 main 分出去 → 開發 → 合併回來。</p>
+
+    <div class="diagram">
+      <!-- Desktop: 橫向 timeline。繪製順序：路徑 → 圓點 → 文字（圓點覆蓋線端） -->
+      <svg class="diagram-svg-desktop" viewBox="0 0 680 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <!-- 路徑（先畫，圓點會蓋在端點上） -->
+        <line x1="80" y1="80" x2="620" y2="80" stroke="#1F3A2E" stroke-width="3"/>
+        <path d="M160 80 Q180 120 200 160" stroke="#5A6B5C" stroke-width="2.5" fill="none"/>
+        <line x1="200" y1="160" x2="460" y2="160" stroke="#5A6B5C" stroke-width="2.5"/>
+        <path d="M460 160 Q480 120 500 80" stroke="#5A6B5C" stroke-width="2.5" fill="none"/>
+        <polygon points="620,75 620,85 628,80" fill="#1F3A2E"/>
+
+        <!-- 圓點 -->
+        <circle cx="160" cy="80" r="8" fill="#1F3A2E"/>
+        <circle cx="260" cy="160" r="6" fill="#5A6B5C"/>
+        <circle cx="340" cy="160" r="6" fill="#5A6B5C"/>
+        <circle cx="420" cy="160" r="6" fill="#5A6B5C"/>
+        <circle cx="500" cy="80" r="9" fill="#B8D9A8" stroke="#1F3A2E" stroke-width="1.5"/>
+        <circle cx="560" cy="80" r="5" fill="#1F3A2E"/>
+
+        <!-- 文字 -->
+        <text x="30" y="84" font-family="JetBrains Mono, monospace" font-size="16" fill="#1F3A2E" font-weight="500">main</text>
+        <text x="160" y="60" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#1F3A2E" text-anchor="middle">建立分支</text>
+        <text x="500" y="60" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#1F3A2E" text-anchor="middle" font-weight="500">合併回 main ✓</text>
+        <text x="330" y="140" font-family="JetBrains Mono, monospace" font-size="15" fill="#5A6B5C" text-anchor="middle">feature/dark-mode</text>
+        <text x="260" y="192" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#5A6B5C" text-anchor="middle">commit</text>
+        <text x="340" y="192" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#5A6B5C" text-anchor="middle">繼續開發</text>
+        <text x="420" y="192" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#5A6B5C" text-anchor="middle">功能完成</text>
+      </svg>
+
+      <!-- Mobile: 直立式 timeline。
+           - 全部 x 座標往右平移 10，讓視覺軸對到 viewBox 中軸
+           - 繪製順序：路徑 → 圓點 → 文字（避免線穿出圓點）
+           - feature/dark-mode 標籤改放到「曲線結束、第一個 commit 之前」的乾淨空間 -->
+      <svg class="diagram-svg-mobile" viewBox="0 0 320 460" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <!-- 路徑 -->
+        <line x1="78" y1="40" x2="78" y2="430" stroke="#1F3A2E" stroke-width="2.5"/>
+        <path d="M78 70 Q112 90 162 130" stroke="#5A6B5C" stroke-width="2.5" fill="none"/>
+        <line x1="162" y1="130" x2="162" y2="320" stroke="#5A6B5C" stroke-width="2.5"/>
+        <path d="M162 320 Q112 350 78 380" stroke="#5A6B5C" stroke-width="2.5" fill="none"/>
+        <polygon points="78,440 73,430 83,430" fill="#1F3A2E"/>
+
+        <!-- 圓點 -->
+        <circle cx="78" cy="70" r="7" fill="#1F3A2E"/>
+        <circle cx="162" cy="170" r="6" fill="#5A6B5C"/>
+        <circle cx="162" cy="225" r="6" fill="#5A6B5C"/>
+        <circle cx="162" cy="280" r="6" fill="#5A6B5C"/>
+        <circle cx="78" cy="380" r="8" fill="#B8D9A8" stroke="#1F3A2E" stroke-width="1.5"/>
+        <circle cx="78" cy="415" r="4" fill="#1F3A2E"/>
+
+        <!-- 文字 -->
+        <text x="78" y="24" font-family="JetBrains Mono, monospace" font-size="16" fill="#1F3A2E" font-weight="500" text-anchor="middle">main</text>
+        <text x="96" y="74" font-family="Noto Sans TC, sans-serif" font-size="16" fill="#1F3A2E" font-weight="500">建立分支</text>
+        <text x="180" y="118" font-family="JetBrains Mono, monospace" font-size="13" fill="#5A6B5C">feature/dark-mode</text>
+        <text x="180" y="174" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#5A6B5C">commit</text>
+        <text x="180" y="229" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#5A6B5C">繼續開發</text>
+        <text x="180" y="284" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#5A6B5C">功能完成</text>
+        <text x="96" y="384" font-family="Noto Sans TC, sans-serif" font-size="16" fill="#1F3A2E" font-weight="500">合併回 main ✓</text>
+      </svg>
+
+      <!-- 重點提示（從 SVG 中抽出，改用 HTML，文字可正常 reflow） -->
+      <div class="diagram-note">
+        <strong>整個過程中，main 分支完全不受影響</strong>
+        <span>只有確認功能沒問題之後，才會合併回去</span>
+      </div>
+
+    </div>
+
+    <p>搭配 Claude Code，整個流程只需要幾句對話就能完成：</p>
+
+    <ol class="flow-list">
+      <li data-step="1">💬 幫我從 main 建立一個新分支，我要做暗色模式</li>
+      <li data-step="2">你開始開發，做了一些改動</li>
+      <li data-step="3">💬 幫我儲存目前的進度</li>
+      <li data-step="4">反覆步驟 2-3，直到功能完成</li>
+      <li data-step="5">💬 我覺得暗色模式做好了，幫我合併回 main</li>
+      <li data-step="6">💬 合併完成後，幫我刪掉這個分支</li>
+    </ol>
+
+    <h3>判斷何時該開分支</h3>
+    <p>一個簡單的判斷方式是，<strong>如果這次的改動可能會影響到目前正常運作的功能，就值得開一條分支</strong>。像是調整一下按鈕顏色、改個文案，這種小改動直接在 main 上做就好；但如果要加一整個新功能、重新設計介面的樣式，那就值得另開分支來做。</p>
+
+    <h3>分支的命名方式</h3>
+    <p>最好的分支命名方式，就是能讓人一眼就知道「這條分支在做什麼」。常見的命名慣例是用 <strong>前綴/描述</strong> 的格式：</p>
 
     <table class="naming-table">
       <thead>
@@ -107,162 +330,50 @@
       </tbody>
     </table>
 
-    <h3>命名的小規則</h3>
     <div class="compare-grid">
       <div class="compare-card good">
         <div class="compare-label">✓ 好的命名</div>
         <code>feature/user-profile-page</code>
         <code>fix/image-not-loading</code>
         <code>design/homepage-redesign</code>
-        <p style="margin-top:8px;font-size:0.9em;color:var(--muted)">用英文小寫、用連字號 <code>-</code> 分隔、簡潔但有描述性</p>
+        <p style="margin-top:8px;font-size:0.9em;color:var(--ink);opacity:0.88">用英文小寫、連字號分隔、簡潔且具描述性</p>
       </div>
       <div class="compare-card bad">
         <div class="compare-label">✗ 不好的命名</div>
         <code>New_Branch</code>
         <code>test123</code>
         <code>brian的修改</code>
-        <p style="margin-top:8px;font-size:0.9em;color:var(--muted)">避免中文、空格、大寫混用、沒有意義的名字</p>
+        <p style="margin-top:8px;font-size:0.9em;color:var(--ink);opacity:0.88">避免中文、空格、大寫混用、沒有意義的名字</p>
       </div>
     </div>
 
     <div class="prompt">
       <div class="prompt-label">對 Claude Code 說</div>
-      <p>「幫我建立一個新分支，我要做深色模式的功能」<br>→ Claude Code 會幫你建立 <code>feature/dark-mode</code> 並切換過去</p>
-    </div>
-  </section>
-
-  <hr class="sep">
-
-  <!-- Section 2 -->
-  <section class="section">
-    <div class="section-number">02</div>
-    <h2>一個功能的完整生命週期</h2>
-
-    <p>了解命名之後，來看看一個功能從開始到結束的完整流程。這是大多數團隊（甚至一個人的專案）會遵循的節奏：</p>
-
-    <div class="diagram">
-      <!-- Desktop: 橫向 timeline -->
-      <svg class="diagram-svg-desktop" viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
-        <line x1="60" y1="80" x2="620" y2="80" stroke="#1F3A2E" stroke-width="3"/>
-        <text x="30" y="84" font-family="JetBrains Mono, monospace" font-size="13" fill="#1F3A2E" font-weight="500">main</text>
-
-        <circle cx="160" cy="80" r="8" fill="#1F3A2E"/>
-
-        <path d="M160 80 Q180 120 200 160" stroke="#c44b2b" stroke-width="2.5" fill="none"/>
-        <line x1="200" y1="160" x2="460" y2="160" stroke="#c44b2b" stroke-width="2.5"/>
-
-        <circle cx="260" cy="160" r="6" fill="#c44b2b"/>
-        <text x="260" y="192" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#5A6B5C" text-anchor="middle">第一次 commit</text>
-
-        <circle cx="340" cy="160" r="6" fill="#c44b2b"/>
-        <text x="340" y="192" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#5A6B5C" text-anchor="middle">繼續開發</text>
-
-        <circle cx="420" cy="160" r="6" fill="#c44b2b"/>
-        <text x="420" y="192" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#5A6B5C" text-anchor="middle">功能完成</text>
-
-        <path d="M460 160 Q480 120 500 80" stroke="#c44b2b" stroke-width="2.5" fill="none"/>
-        <circle cx="500" cy="80" r="8" fill="#2d6a4f"/>
-
-        <text x="160" y="60" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#1F3A2E" text-anchor="middle">建立分支</text>
-        <text x="500" y="60" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#2d6a4f" text-anchor="middle" font-weight="500">合併回 main ✓</text>
-        <text x="330" y="140" font-family="JetBrains Mono, monospace" font-size="12" fill="#c44b2b" text-anchor="middle">feature/dark-mode</text>
-
-        <circle cx="560" cy="80" r="5" fill="#1F3A2E"/>
-        <polygon points="616,80 624,75 624,85" fill="#1F3A2E"/>
-      </svg>
-
-      <!-- Mobile: 直立式 timeline，文字靠右排，窄螢幕也能讀 -->
-      <svg class="diagram-svg-mobile" viewBox="0 0 320 460" xmlns="http://www.w3.org/2000/svg">
-        <!-- Main 直線 -->
-        <line x1="56" y1="40" x2="56" y2="430" stroke="#1F3A2E" stroke-width="2.5"/>
-        <text x="56" y="24" font-family="JetBrains Mono, monospace" font-size="13" fill="#1F3A2E" font-weight="500" text-anchor="middle">main</text>
-        <polygon points="56,440 51,430 61,430" fill="#1F3A2E"/>
-
-        <!-- 建立分支點 -->
-        <circle cx="56" cy="70" r="7" fill="#1F3A2E"/>
-        <text x="74" y="74" font-family="Noto Sans TC, sans-serif" font-size="13" fill="#1F3A2E" font-weight="500">建立分支</text>
-
-        <!-- 從 main 分出去的曲線 -->
-        <path d="M56 70 Q90 90 140 130" stroke="#c44b2b" stroke-width="2.5" fill="none"/>
-
-        <!-- feature 直線 -->
-        <line x1="140" y1="130" x2="140" y2="320" stroke="#c44b2b" stroke-width="2.5"/>
-
-        <!-- feature/dark-mode 標籤 -->
-        <text x="140" y="118" font-family="JetBrains Mono, monospace" font-size="11" fill="#c44b2b" text-anchor="middle">feature/dark-mode</text>
-
-        <!-- 三個 commit -->
-        <circle cx="140" cy="170" r="6" fill="#c44b2b"/>
-        <text x="158" y="174" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#5A6B5C">第一次 commit</text>
-
-        <circle cx="140" cy="225" r="6" fill="#c44b2b"/>
-        <text x="158" y="229" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#5A6B5C">繼續開發</text>
-
-        <circle cx="140" cy="280" r="6" fill="#c44b2b"/>
-        <text x="158" y="284" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#5A6B5C">功能完成</text>
-
-        <!-- 合併回 main 的曲線 -->
-        <path d="M140 320 Q90 350 56 380" stroke="#c44b2b" stroke-width="2.5" fill="none"/>
-
-        <!-- 合併點 -->
-        <circle cx="56" cy="380" r="7" fill="#2d6a4f"/>
-        <text x="74" y="384" font-family="Noto Sans TC, sans-serif" font-size="13" fill="#2d6a4f" font-weight="500">合併回 main ✓</text>
-
-        <!-- 主線繼續 -->
-        <circle cx="56" cy="415" r="4" fill="#1F3A2E"/>
-      </svg>
-
-      <!-- 重點提示（從 SVG 中抽出，改用 HTML，文字可正常 reflow） -->
-      <div class="diagram-note">
-        <strong>整個過程中，main 分支完全不受影響</strong>
-        <span>只有確認功能沒問題之後，才會合併回去</span>
-      </div>
-
-      <div class="diagram-caption">功能分支的生命週期：從 main 分出去 → 開發 → 合併回來</div>
+      <p>「我想加一個深色模式，幫我開一條新的分支來做」<br>→ Claude Code 會建立 <code>feature/dark-mode</code> 並切換過去</p>
     </div>
 
-    <p>用 Claude Code 走完這整個流程，你只需要這幾句話：</p>
+    <h3>做到一半想切換分支？用 Stash 先暫存</h3>
+    <p>有時候你正在分支上做深色模式，做到一半突然發現首頁有個 Bug 想立刻處理。但深色模式還沒做完，你也不想 commit 一個半成品。這時候就可以用 <code>stash</code>（暫存）。</p>
 
-    <ol class="flow-list">
-      <li data-step="1">「幫我從 main 建立一個新分支，我要做暗色模式」</li>
-      <li data-step="2">（你開始開發，做了一些改動）</li>
-      <li data-step="3">「幫我儲存目前的進度」</li>
-      <li data-step="4">（反覆步驟 2-3，直到功能完成）</li>
-      <li data-step="5">「我覺得暗色模式做好了，幫我合併回 main」</li>
-      <li data-step="6">「合併完成後，幫我刪掉這個分支」</li>
-    </ol>
-  </section>
+    <p>它會把你目前做到一半的改動先收起來，讓你乾淨地切換到別的分支；等忙完了，再把暫存的東西拿回來繼續做。</p>
 
-  <hr class="sep">
-
-  <!-- Section 3 -->
-  <section class="section">
-    <div class="section-number">03</div>
-    <h2>Commit 訊息怎麼寫才有用</h2>
-
-    <p>原文提到 Claude Code 會幫你產生 commit 訊息，這很好用。但如果你想更進一步理解「好的 commit 訊息」長什麼樣子，會幫助你在看歷史紀錄時更快找到需要的版本。</p>
+    <div class="tip">
+      你可能會想，直接 commit 一個半成品不行嗎？可以，只是這樣 commit 歷史會多出一堆「做到一半」的紀錄。Stash 就是為了保持 commit 歷史乾淨而存在的。剛開始接觸 Git 時，先養成 commit 的習慣比較重要，整潔度可以之後再要求。
+    </div>
 
     <div class="analogy">
       <div class="analogy-label">生活比喻</div>
-      Commit 訊息就像日記的標題。你不會在日記上只寫「今天做了事」，你會寫「跟客戶開會討論 Logo 定稿」。好的 commit 訊息也是一樣，要讓你三個月後回頭看時，不用打開檔案就知道那次改了什麼。
+      這就好比你正在桌上拼一塊拼圖，拼到一半臨時要把桌面騰出來做別的事。你不想把已經拼好的部分打散，就把整塊拼圖連同底下的墊板小心搬到旁邊；等桌子能再用，再把它搬回來，從原處繼續拼。Stash 就好比那塊墊板，讓我們能保留目前進度來先處理其它事務。
     </div>
 
-    <h3>業界常用的格式</h3>
-    <p>很多團隊採用一種叫 <strong>Conventional Commits</strong> 的格式，用一個「類型」開頭：</p>
-
-    <div class="code-block">
-      <span class="comment"># 格式</span><br>
-      <span class="cmd">類型</span>: <span class="string">簡短描述這次改了什麼</span><br><br>
-      <span class="comment"># 實際範例</span><br>
-      <span class="cmd">feat</span>: <span class="string">新增深色模式切換按鈕</span><br>
-      <span class="cmd">fix</span>: <span class="string">修復手機版選單無法關閉的問題</span><br>
-      <span class="cmd">style</span>: <span class="string">調整首頁標題的字體大小和間距</span><br>
-      <span class="cmd">docs</span>: <span class="string">更新 README 的安裝說明</span><br>
-      <span class="cmd">refactor</span>: <span class="string">簡化導覽列的程式碼結構</span>
+    <div class="prompt">
+      <div class="prompt-label">對 Claude Code 說</div>
+      <p>「先幫我將目前的進度暫存起來，我要切換到另一個分支」</p>
     </div>
 
-    <div class="tip">
-      你不需要記住這些格式。跟 Claude Code 說「幫我用 Conventional Commits 格式儲存」，它就會自動幫你分析改動並產生合適的訊息。
+    <div class="prompt">
+      <div class="prompt-label">回來之後</div>
+      <p>「幫我切回剛才的分支，把暫存的東西拿回來」</p>
     </div>
   </section>
 
@@ -271,36 +382,55 @@
   <!-- Section 4 -->
   <section class="section">
     <div class="section-number">04</div>
-    <h2>合併的三種方式</h2>
+    <h2>合併分支來整合開發成果</h2>
 
-    <p>原文提到「合併分支的方式有很多，但我只懂 merge」。讓我用最簡單的方式解釋三種常見的合併方式，這樣你跟 Claude Code 討論時會更有概念：</p>
+    <p>當你在分支上完成了一個功能、確認沒問題之後，就可以把它合併（Merge）回 main 分支。常見的合併方式有兩種：</p>
 
-    <h3>① Merge（合併）</h3>
-    <p>最直覺的方式。就像兩條路在交叉口匯合，歷史紀錄會保留完整的分支痕跡，你可以清楚看到「這些改動是從哪個分支來的」。</p>
+    <h3>Merge：保留完整歷程</h3>
+    <p>這是最直覺的合併方式。就像兩條路在交叉口匯合，Git 會保留完整的分支痕跡，讓你清楚看到這些改動是從哪個分支來的。</p>
 
-    <div class="key-point">
-      <div class="key-point-title">適合什麼時候？</div>
-      你想保留完整的開發歷程，讓未來回頭看時知道每個功能是怎麼分開開發的。大部分情況用這個就夠了。
-    </div>
+    <p>大部分情況下用 Merge 就夠了。它的好處是歷史紀錄完整，未來回頭看時，能清楚知道每個功能是怎麼分開開發、又在什麼時候合併的。</p>
 
-    <h3>② Rebase（變基）</h3>
-    <p>把你的分支「搬到」main 的最前面，讓歷史紀錄看起來像一條直線，好像這些改動一直都是在 main 上面做的一樣。</p>
+    <h3>Squash and Merge：壓成一筆乾淨的紀錄</h3>
+    <p>如果你在開發過程中留下了很多瑣碎的小 commit，像是修了一個 typo、調整一下間距等，用 Squash and Merge 可以把這些全部壓縮成一個 commit 再合併。</p>
 
-    <div class="analogy">
-      <div class="analogy-label">生活比喻</div>
-      想像你在寫一篇文章，你把草稿寫在另一張紙上。Merge 是把草稿釘在文章旁邊，Rebase 是把草稿的內容謄寫到文章的最後面，然後把草稿丟掉。成品看起來更乾淨，但你看不出哪些是後來加的。
-    </div>
-
-    <h3>③ Squash and Merge（壓縮合併）</h3>
-    <p>把分支上的多次 commit 「壓縮」成一個 commit 再合併。適合那種你開發過程中有很多瑣碎的小存檔（像是「修了一個 typo」「忘了存檔」之類的），合併時只留一個乾淨的紀錄。</p>
+    <p>如此最終在 main 上，只會看到一筆乾淨的紀錄，例如「feat: 新增深色模式」，而不是十幾筆零碎的小改動。</p>
 
     <div class="prompt">
       <div class="prompt-label">對 Claude Code 說</div>
-      <p>「我想把 feature/dark-mode 合併回 main，但我在開發過程中有很多小 commit，可以幫我壓成一個嗎？」<br>→ Claude Code 就會用 squash merge 幫你處理</p>
+      <p>「我想把 feature/dark-mode 合併回 main，但我在開發過程中有很多小 commit，幫我壓成一個」<br>→ Claude Code 就會用 squash merge 來處理</p>
     </div>
 
     <div class="tip">
-      不確定用哪種？直接問 Claude Code：「幫我分析一下，這個分支用哪種方式合併比較適合？」它會根據你的 commit 數量和內容給建議。
+      不確定該用哪種？直接問 Claude Code：「幫我分析一下，這個分支用哪種方式合併比較適合？」它會根據你的 commit 數量和內容給建議，你再根據說明來選擇就好。
+    </div>
+
+    <h3>當合併時遇到衝突</h3>
+    <p>合併的時候，有時可能會遇到一個狀況：你在 main 規劃好導覽列的樣式後，但後來在其他分支也動到導覽列的設計。此時若要將分支合併回 main，Git 就會發現同一個地方有兩個不同的版本，它不確定你要用哪一個，這就是 <strong>合併衝突（Conflict）</strong>。</p>
+
+    <div class="analogy">
+      <div class="analogy-label">生活比喻</div>
+      想像你跟同事各自拿了同一份簡報去改。你把第三頁的標題改成「公司展望」，同事改成「未來計畫」。當你們要合併時，Git 會問：「第三頁的標題要用哪個？」這就是衝突。Git 不會自作主張幫你選，它會把兩個版本都列出來讓你決定。
+    </div>
+
+    <p>衝突不是壞事，這是 Git 幫你把關的一環。</p>
+
+    <div class="prompt">
+      <div class="prompt-label">對 Claude Code 說</div>
+      <p>「幫我把 feature/dark-mode 合併回 main」<br>→ 如果合併過程中遇到衝突，Claude Code 會主動列出衝突的檔案和位置，解釋兩邊各改了什麼，然後問你想保留哪個版本</p>
+    </div>
+
+    <div class="tip">
+      不需要擔心怕有衝突而不敢開分支。有 Claude Code 幫忙，解決衝突的過程比你想像的簡單很多。
+    </div>
+
+    <h3>隨手清理分支，讓專案保持整潔</h3>
+    <p>值得注意的是，分支在合併後並不會自動消失。雖然 Git 會標示哪些分支已經合併，但隨著功能越做越多，分支清單還是會越來越長、看起來越來越雜。</p>
+
+    <p>因此可以在合併完成後順手刪除用完的分支。<strong>刪除分支後並不會遺失任何資料</strong>，被刪掉的只是「分支名稱」這個書籤，分支上做過的每一次 commit 都已經寫進 main 的歷史裡，未來想翻回當時的狀態，用 git log 找到那個 commit 隨時都可以回去。</p>
+
+    <div class="tip">
+      如果評估某個功能近期還要微調，這個分支就可以先保留著。或是合併後先觀察一陣子，確認 main 運作正常再刪除也不遲。
     </div>
   </section>
 
@@ -309,63 +439,17 @@
   <!-- Section 5 -->
   <section class="section">
     <div class="section-number">05</div>
-    <h2>衝突是什麼？不用怕</h2>
+    <h2>用 .gitignore 保護你的 API 金鑰</h2>
 
-    <p>當你跟另一個人（或你自己在不同分支上）改了同一個檔案的同一個地方，Git 會說「我不知道該用哪個版本」——這就是「衝突（conflict）」。</p>
-
-    <div class="analogy">
-      <div class="analogy-label">生活比喻</div>
-      想像你跟同事各自拿了同一份簡報去改。你把第三頁的標題改成「2025 展望」，同事改成「未來計畫」。當你們要合併時，Git 會問：「第三頁的標題要用哪個？」這就是衝突。Git 不會自作主張幫你選，它會把兩個版本都列出來讓你決定。
-    </div>
-
-    <p>衝突不是壞事，它是 Git 在保護你。遇到衝突時：</p>
-
-    <div class="prompt">
-      <div class="prompt-label">對 Claude Code 說</div>
-      <p>「合併的時候好像有衝突了，可以幫我看看是什麼情況嗎？」<br>→ Claude Code 會列出衝突的檔案和位置，解釋兩邊各改了什麼，然後問你想保留哪個</p>
-    </div>
+    <p>在 Vibe Coding 的過程中，專案很可能會用到第三方服務的 API 金鑰或密碼，這些機密資訊通常會存在一個叫 <code>.env</code> 的檔案裡。</p>
 
     <div class="warning">
-      不要因為怕衝突就不敢開分支。衝突只在合併時才會出現，而且有 Claude Code 在，解決衝突比你想像的簡單很多。
-    </div>
-  </section>
-
-  <hr class="sep">
-
-  <!-- Section 6 -->
-  <section class="section">
-    <div class="section-number">06</div>
-    <h2>Stash：暫時收起來</h2>
-
-    <p>有時候你正在做 A 功能，突然被要求去修 B 的 Bug。但 A 還沒做完，你不想 commit 一個半成品。這時候就可以用 <code>stash</code>（暫存）。</p>
-
-    <div class="analogy">
-      <div class="analogy-label">生活比喻</div>
-      你正在桌上畫設計稿，突然要去開會。你不想收掉也不想弄亂，就把所有東西推到一邊、蓋上一張紙。開完會回來，再把紙掀開繼續畫。Stash 就是那張紙。
+      這個檔案是<strong>絕對不能被 Git 記錄到</strong>的。一旦 commit 之後推送到 GitHub，你的金鑰就等於公開在網路上了。網路上有很多駭客寫的機器人 24 小時自動掃描 GitHub，只要金鑰一曝光，幾秒鐘內就可能被盜刷或濫用。更麻煩的是，Git 會記住所有事情，就算事後從資料夾裡刪掉那個檔案，歷史紀錄裡還是找得到。
     </div>
 
-    <div class="prompt">
-      <div class="prompt-label">對 Claude Code 說</div>
-      <p>「我現在做到一半，先幫我暫存起來，我要切到另一個分支去修 Bug」</p>
-    </div>
-
-    <div class="prompt">
-      <div class="prompt-label">修完 Bug 之後</div>
-      <p>「修完了，幫我切回剛才的分支，把暫存的東西拿回來」</p>
-    </div>
-  </section>
-
-  <hr class="sep">
-
-  <!-- Section 7 -->
-  <section class="section">
-    <div class="section-number">07</div>
-    <h2>.gitignore：哪些東西不該被記錄</h2>
-
-    <p>不是所有東西都需要被 Git 追蹤。有些檔案是你的電腦自動產生的、有些包含機密資訊、有些就是太大了。<code>.gitignore</code> 是一個告訴 Git「請忽略這些檔案」的清單。</p>
+    <p>而 <code>.gitignore</code> 就是用來防止這件事的。它是一份告訴 Git「請忽略這些檔案」的清單，只要把 <code>.env</code> 加進去，Git 就不會追蹤它。</p>
 
     <h3>常見該忽略的東西</h3>
-
     <div class="code-block">
       <span class="comment"># 套件資料夾（很大，可以隨時重新安裝）</span><br>
       <span class="string">node_modules/</span><br><br>
@@ -381,62 +465,32 @@
 
     <div class="prompt">
       <div class="prompt-label">對 Claude Code 說</div>
-      <p>「幫我建立一個 .gitignore，這是一個 React 專案」<br>→ Claude Code 會根據你的專案類型，產生一個合適的 .gitignore</p>
+      <p>「幫我建立一個 .gitignore，確保 .env 不會被追蹤」<br>→ Claude Code 會根據你的專案類型，自動加入該忽略的系統暫存檔或套件資料夾</p>
     </div>
 
-    <div class="warning">
-      特別注意 <code>.env</code> 檔案！如果你的專案有用到任何 API 金鑰或密碼，一定要確認 <code>.env</code> 有在 .gitignore 裡面。一旦推送到 GitHub，你的金鑰就等於公開了。
+    <h3>確認 .env 是否有被保護</h3>
+    <p>如果不確定 .env 有沒有被保護到，有兩種方式可以確認：</p>
+
+    <ol>
+      <li>直接問 Claude Code：「幫我確認一下，<code>.env</code> 有在 .gitignore 裡面嗎？」</li>
+      <li>自己打開來看：<code>.gitignore</code> 是放在專案根目錄的純文字檔，可以用任何文字編輯器打開，只要裡面有一行寫著 <code>.env</code> 就安全了。</li>
+    </ol>
+
+    <div class="key-point">
+      <div class="key-point-title">如果不小心已經把 .env 傳上 GitHub 了</div>
+      最快也最安全的補救方法不是去改 Git 紀錄，而是立刻去那個第三方服務的後台，把 API 金鑰作廢（Revoke），然後重新申請一把新的，這樣就不用怕原本的金鑰被濫用。
     </div>
-  </section>
 
-  <hr class="sep">
+    <p>建議的習慣是把「設定 .gitignore」當作每個新專案的起手式：</p>
 
-  <!-- Section 8 -->
-  <section class="section">
-    <div class="section-number">08</div>
-    <h2>跟 Claude Code 的實戰對話範本</h2>
-
-    <p>最後整理一些你可以直接複製來用的對話，涵蓋這篇文章提到的所有情境：</p>
-
-    <h3>專案初始化</h3>
     <div class="prompt">
-      <div class="prompt-label">你說</div>
+      <div class="prompt-label">新專案的第一步</div>
       <p>「幫我初始化 Git，建立 .gitignore，然後做第一次存檔」</p>
     </div>
 
-    <h3>確認改了什麼</h3>
-    <div class="prompt">
-      <div class="prompt-label">你說</div>
-      <p>「幫我看一下從上次存檔之後，我改了哪些東西」</p>
-    </div>
-
-    <h3>回顧過去的進度</h3>
-    <div class="prompt">
-      <div class="prompt-label">你說</div>
-      <p>「列出最近幾次的存檔紀錄，我想看看這幾天做了什麼」</p>
-    </div>
-
-    <h3>還原特定檔案</h3>
-    <div class="prompt">
-      <div class="prompt-label">你說</div>
-      <p>「我剛才改壞了首頁的樣式，可以幫我把首頁的樣式檔案還原到上一次存檔的版本嗎？」</p>
-    </div>
-
-    <h3>嘗試新方向</h3>
-    <div class="prompt">
-      <div class="prompt-label">你說</div>
-      <p>「我想試試看把整個配色換掉，但不確定效果好不好，幫我開一個新的分支來嘗試」</p>
-    </div>
-
-    <h3>搞砸了也沒關係</h3>
-    <div class="prompt">
-      <div class="prompt-label">你說</div>
-      <p>「我好像把整個專案搞亂了，可以幫我還原到今天早上的狀態嗎？」</p>
-    </div>
-
     <div class="key-point">
-      <div class="key-point-title">記住一件事</div>
-      Git 的設計哲學就是「讓你可以放心地嘗試」。任何改動都可以被追蹤、被還原、被分離到不同的分支。搭配 Claude Code，你不需要記住任何指令——只要用自然語言描述你想做什麼，它就會幫你轉換成正確的 Git 操作。
+      <div class="key-point-title">最後想跟你說的</div>
+      Git 的設計哲學就是「讓你可以放心地嘗試」，任何改動都能被追蹤、被還原、被分離到不同的分支。搭配 Claude Code、Codex 這類 AI 工具後，你不再需要硬記任何指令，只要用自然語言描述你想做什麼，它們就會幫你轉換成正確的 Git 操作。掌握了如何使用 Git 的概念，等於為你的專案拿到了一把無限次數的「時光鑰匙」，任何時候都能放心嘗試新想法，因為你知道隨時都能回到安全的版本：）
     </div>
   </section>
 
@@ -451,16 +505,16 @@
 
 <!-- Section 1 -->
   <section class="section">
-    <div class="section-number">09</div>
+    <div class="section-number">06</div>
     <h2>Git 跟 GitHub 的差別</h2>
 
-    <p>之前我們學了 Git——它是一套裝在你電腦上的版本控制工具，負責追蹤檔案的變更。但 Git 本身只在你自己的電腦上運作。</p>
+    <p>之前我們學了 Git，它是一套裝在你電腦上的版本控制工具，負責追蹤檔案的變更。但 Git 本身只在你自己的電腦上運作。</p>
 
     <p>GitHub 則是一個「雲端平台」，讓你可以把 Git 管理的專案放到網路上。這樣一來，你可以在不同裝置之間同步、把專案分享給別人、或是使用別人公開分享的專案。</p>
 
     <div class="analogy">
       <div class="analogy-label">生活比喻</div>
-      Git 就像你手上的相機，負責拍照和整理相簿。GitHub 就像 Google 相簿——讓你把相片放到雲端，可以跟別人共享，別人也可以從上面下載你的照片。相機（Git）跟雲端相簿（GitHub）是兩個獨立的東西，但搭配使用會非常方便。
+      Git 就像你手上的相機，負責拍照和整理相簿。GitHub 就像 Google 相簿，讓你把相片放到雲端，可以跟別人共享，別人也可以從上面下載你的照片。相機（Git）跟雲端相簿（GitHub）是兩個獨立的東西，但搭配使用會非常方便。
     </div>
 
     <div class="key-point">
@@ -474,7 +528,7 @@
 
   <!-- Section 2 -->
   <section class="section">
-    <div class="section-number">10</div>
+    <div class="section-number">07</div>
     <h2>Repository（倉庫）：GitHub 的基本單位</h2>
 
     <p>在 GitHub 上，每一個專案都存放在一個叫 <strong>Repository</strong>（簡稱 repo）的地方。你可以把它想成一個雲端資料夾，裡面裝著一個專案的所有檔案和它的完整版本歷史。</p>
@@ -509,60 +563,96 @@
 
   <!-- Section 3 -->
   <section class="section">
-    <div class="section-number">11</div>
+    <div class="section-number">08</div>
     <h2>Push、Pull、Clone：Git 與 GitHub 之間的溝通方式</h2>
 
     <p>Git（你的電腦）和 GitHub（雲端）之間，靠三個動作來交換資料。把這三個搞懂，Git + GitHub 的複合使用就通了。</p>
 
     <div class="diagram">
-      <svg viewBox="0 0 660 280" xmlns="http://www.w3.org/2000/svg">
-        <!-- Your computer box -->
-        <rect x="30" y="40" rx="12" ry="12" width="240" height="200" fill="none" stroke="#1a1a2e" stroke-width="2"/>
-        <text x="150" y="72" font-family="Noto Sans TC, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" font-weight="700">你的電腦</text>
-        <text x="150" y="94" font-family="JetBrains Mono, monospace" font-size="11" fill="#6b6b7b" text-anchor="middle">（本地 Git repo）</text>
+      <!-- Desktop: 兩個方塊 + 三個動作箭頭 -->
+      <svg class="diagram-svg-desktop" viewBox="0 0 660 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+        <!-- 兩個容器 box -->
+        <rect x="30" y="40" rx="14" ry="14" width="240" height="200" fill="none" stroke="#1F3A2E" stroke-width="2"/>
+        <rect x="390" y="40" rx="14" ry="14" width="240" height="200" fill="none" stroke="#1F3A2E" stroke-width="2"/>
 
-        <rect x="65" y="115" rx="6" ry="6" width="170" height="36" fill="#f0f4f8" stroke="#c0cfe0"/>
-        <text x="150" y="138" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#1d3557" text-anchor="middle">你的專案檔案</text>
+        <!-- 內層子方塊 -->
+        <rect x="65" y="115" rx="8" ry="8" width="170" height="36" fill="#E8E3D8" stroke="#5A6B5C" stroke-width="1"/>
+        <rect x="65" y="165" rx="8" ry="8" width="170" height="36" fill="#E8E3D8" stroke="#5A6B5C" stroke-width="1"/>
+        <rect x="425" y="115" rx="8" ry="8" width="170" height="36" fill="#E8E3D8" stroke="#5A6B5C" stroke-width="1"/>
+        <rect x="425" y="165" rx="8" ry="8" width="170" height="36" fill="#E8E3D8" stroke="#5A6B5C" stroke-width="1"/>
 
-        <rect x="65" y="165" rx="6" ry="6" width="170" height="36" fill="#f0f4f8" stroke="#c0cfe0"/>
-        <text x="150" y="188" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#1d3557" text-anchor="middle">Git 版本歷史</text>
+        <!-- 三條動作線（push 深、pull 中、clone 淺虛線） -->
+        <line x1="275" y1="115" x2="383" y2="115" stroke="#1F3A2E" stroke-width="2.5" marker-end="url(#arrowInk)"/>
+        <line x1="383" y1="155" x2="275" y2="155" stroke="#5A6B5C" stroke-width="2" marker-end="url(#arrowMuted)"/>
+        <line x1="383" y1="200" x2="275" y2="200" stroke="#1F3A2E" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowInk)"/>
 
-        <!-- GitHub box -->
-        <rect x="390" y="40" rx="12" ry="12" width="240" height="200" fill="none" stroke="#2d6a4f" stroke-width="2"/>
-        <text x="510" y="72" font-family="Noto Sans TC, sans-serif" font-size="14" fill="#2d6a4f" text-anchor="middle" font-weight="700">GitHub</text>
-        <text x="510" y="94" font-family="JetBrains Mono, monospace" font-size="11" fill="#6b6b7b" text-anchor="middle">（雲端 repo）</text>
+        <!-- 文字 -->
+        <text x="150" y="72" font-family="DM Serif Display, Noto Serif TC, serif" font-size="22" fill="#1F3A2E" text-anchor="middle">你的電腦</text>
+        <text x="150" y="94" font-family="JetBrains Mono, monospace" font-size="14" fill="#5A6B5C" text-anchor="middle">（本地 Git repo）</text>
+        <text x="150" y="138" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#1F3A2E" text-anchor="middle">你的專案檔案</text>
+        <text x="150" y="188" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#1F3A2E" text-anchor="middle">Git 版本歷史</text>
 
-        <rect x="425" y="115" rx="6" ry="6" width="170" height="36" fill="#f0f7f4" stroke="#b7d8c6"/>
-        <text x="510" y="138" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#2d6a4f" text-anchor="middle">雲端的檔案副本</text>
+        <text x="510" y="72" font-family="DM Serif Display, Noto Serif TC, serif" font-size="22" fill="#1F3A2E" text-anchor="middle">GitHub</text>
+        <text x="510" y="94" font-family="JetBrains Mono, monospace" font-size="14" fill="#5A6B5C" text-anchor="middle">（雲端 repo）</text>
+        <text x="510" y="138" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#1F3A2E" text-anchor="middle">雲端的檔案副本</text>
+        <text x="510" y="188" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#1F3A2E" text-anchor="middle">雲端的版本歷史</text>
 
-        <rect x="425" y="165" rx="6" ry="6" width="170" height="36" fill="#f0f7f4" stroke="#b7d8c6"/>
-        <text x="510" y="188" font-family="Noto Sans TC, sans-serif" font-size="12" fill="#2d6a4f" text-anchor="middle">雲端的版本歷史</text>
+        <text x="330" y="107" font-family="JetBrains Mono, monospace" font-size="15" fill="#1F3A2E" text-anchor="middle" font-weight="500">push</text>
+        <text x="330" y="147" font-family="JetBrains Mono, monospace" font-size="15" fill="#5A6B5C" text-anchor="middle" font-weight="500">pull</text>
+        <text x="330" y="192" font-family="JetBrains Mono, monospace" font-size="15" fill="#1F3A2E" text-anchor="middle" font-weight="500">clone</text>
 
-        <!-- Push arrow -->
-        <line x1="275" y1="115" x2="383" y2="115" stroke="#c44b2b" stroke-width="2" marker-end="url(#arrowRed)"/>
-        <text x="330" y="107" font-family="JetBrains Mono, monospace" font-size="12" fill="#c44b2b" text-anchor="middle" font-weight="500">push</text>
-
-        <!-- Pull arrow -->
-        <line x1="383" y1="155" x2="275" y2="155" stroke="#1d3557" stroke-width="2" marker-end="url(#arrowBlue)"/>
-        <text x="330" y="147" font-family="JetBrains Mono, monospace" font-size="12" fill="#1d3557" text-anchor="middle" font-weight="500">pull</text>
-
-        <!-- Clone arrow -->
-        <line x1="383" y1="200" x2="275" y2="200" stroke="#6c4ab6" stroke-width="2" marker-end="url(#arrowPurple)"/>
-        <text x="330" y="192" font-family="JetBrains Mono, monospace" font-size="12" fill="#6c4ab6" text-anchor="middle" font-weight="500">clone</text>
-
-        <!-- Arrow markers -->
         <defs>
-          <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <polygon points="0 0, 8 3, 0 6" fill="#c44b2b"/>
+          <marker id="arrowInk" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#1F3A2E"/>
           </marker>
-          <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <polygon points="0 0, 8 3, 0 6" fill="#1d3557"/>
-          </marker>
-          <marker id="arrowPurple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <polygon points="0 0, 8 3, 0 6" fill="#6c4ab6"/>
+          <marker id="arrowMuted" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#5A6B5C"/>
           </marker>
         </defs>
       </svg>
+
+      <!-- Mobile: 直立堆疊卡片 + 線段式箭頭 + 註腳 -->
+      <div class="flow-mobile">
+        <div class="flow-card flow-card--local">
+          <div class="flow-card-title">你的電腦</div>
+          <div class="flow-card-sub">本地 Git repo</div>
+          <div class="flow-card-items">
+            <span>你的專案檔案</span>
+            <span>Git 版本歷史</span>
+          </div>
+        </div>
+
+        <div class="flow-arrows">
+          <div class="flow-arrow flow-arrow--push">
+            <span class="flow-arrow-stem"></span>
+            <span class="flow-arrow-name">push<sup>*</sup></span>
+          </div>
+          <div class="flow-arrow flow-arrow--pull">
+            <span class="flow-arrow-stem"></span>
+            <span class="flow-arrow-name">pull<sup>*</sup></span>
+          </div>
+          <div class="flow-arrow flow-arrow--clone">
+            <span class="flow-arrow-stem"></span>
+            <span class="flow-arrow-name">clone<sup>*</sup></span>
+          </div>
+        </div>
+
+        <div class="flow-card flow-card--remote">
+          <div class="flow-card-title">GitHub</div>
+          <div class="flow-card-sub">雲端 repo</div>
+          <div class="flow-card-items">
+            <span>雲端的檔案副本</span>
+            <span>雲端的版本歷史</span>
+          </div>
+        </div>
+
+        <ul class="flow-notes">
+          <li><span class="flow-notes-mark">*</span><strong>push</strong>：把改動推到雲端</li>
+          <li><span class="flow-notes-mark">*</span><strong>pull</strong>：把雲端最新版本拉下來</li>
+          <li><span class="flow-notes-mark">*</span><strong>clone</strong>：第一次下載整個專案</li>
+        </ul>
+      </div>
+
       <div class="diagram-caption">Git（本地）與 GitHub（雲端）之間的三個核心操作</div>
     </div>
 
@@ -606,7 +696,7 @@
 
   <!-- Section 4 -->
   <section class="section">
-    <div class="section-number">12</div>
+    <div class="section-number">09</div>
     <h2>Fork（分叉）：在你的帳號下複製一份</h2>
 
     <p>Fork 是 GitHub 上一個很重要的概念，也是你特別問到的。它跟 Clone 很像，但有一個關鍵差別：</p>
@@ -630,7 +720,7 @@
 
     <div class="analogy">
       <div class="analogy-label">生活比喻</div>
-      Clone 是去圖書館影印一本書回家看。Fork 是在圖書館的系統裡「借閱」一本書到你自己的書架上——這本書在你的帳號下，你可以在上面做筆記、改內容。如果你做了很好的註解，你還可以建議圖書館把你的註解加進原版裡面。
+      Clone 是去圖書館影印一本書回家看。Fork 是在圖書館的系統裡「借閱」一本書到你自己的書架上，這本書在你的帳號下，你可以在上面做筆記、改內容。如果你做了很好的註解，你還可以建議圖書館把你的註解加進原版裡面。
     </div>
 
     <h3>什麼時候用 Fork？</h3>
@@ -639,17 +729,17 @@
 
     <p><strong>想貢獻改進給原作者</strong> — 如果你在使用過程中發現了 Bug 或想到了改進方式，你可以在你的 fork 裡改好，然後透過「Pull Request」提交給原作者審閱。</p>
 
-    <p>Fork 的操作很簡單——在 GitHub 的 repo 頁面右上角，有一個「Fork」按鈕，點下去就完成了。你的帳號下就會多出一個完全一樣的 repo，它下方會標注「forked from garrytan/gstack」。</p>
+    <p>Fork 的操作很簡單，在 GitHub 的 repo 頁面右上角，有一個「Fork」按鈕，點下去就完成了。你的帳號下就會多出一個完全一樣的 repo，它下方會標注「forked from garrytan/gstack」。</p>
   </section>
 
   <hr class="sep">
 
   <!-- Section 5 -->
   <section class="section">
-    <div class="section-number">13</div>
+    <div class="section-number">10</div>
     <h2>Contributors（貢獻者）是怎麼來的</h2>
 
-    <p>你在 gstack 的 repo 上看到了 Contributors，好奇他們是不是「一起協作來優化這個專案」——答案是對的，但他們的協作方式跟你想的可能不太一樣。</p>
+    <p>你在 gstack 的 repo 上看到了 Contributors，好奇他們是不是「一起協作來優化這個專案」，答案是對的，但他們的協作方式跟你想的可能不太一樣。</p>
 
     <p>在開源專案中，Contributors <strong>通常不是被邀請進來的</strong>。大部分的流程是這樣的：</p>
 
@@ -674,7 +764,7 @@
 
   <!-- Section 6 -->
   <section class="section">
-    <div class="section-number">14</div>
+    <div class="section-number">11</div>
     <h2>Pull Request（PR）：提交你的改動</h2>
 
     <p>Pull Request 是 GitHub 上最重要的協作機制。名字聽起來有點奇怪，但概念很簡單：</p>
@@ -692,58 +782,56 @@
     <p><strong>具體的程式碼改動</strong> — GitHub 會用紅色和綠色標出哪些行被刪除、哪些行被新增</p>
     <p><strong>討論區</strong> — 原作者和其他人可以在這裡提問、給建議、要求修改</p>
 
-    <p>Pull Request 不是「丟出去就結束」。它更像是一場對話——原作者可能會說「這邊可以再改一下」，你就回去修改後再更新。直到雙方都滿意了，才會合併進去。</p>
+    <p>Pull Request 不是「丟出去就結束」。它更像是一場對話，原作者可能會說「這邊可以再改一下」，你就回去修改後再更新。直到雙方都滿意了，才會合併進去。</p>
   </section>
 
   <hr class="sep">
 
   <!-- Section 7 -->
   <section class="section">
-    <div class="section-number">15</div>
+    <div class="section-number">12</div>
     <h2>Vibe Coding 時的 Git + GitHub 實務流程</h2>
 
     <p>了解了個別的操作之後，來看看 Vibe Coding 時，整個流程串起來會長什麼樣子：</p>
 
-    <div class="diagram">
-      <svg viewBox="0 0 660 420" xmlns="http://www.w3.org/2000/svg">
-        <!-- Step 1 -->
-        <rect x="30" y="20" rx="10" ry="10" width="600" height="56" fill="#f0f4f8" stroke="#c0cfe0"/>
-        <text x="56" y="42" font-family="JetBrains Mono, monospace" font-size="12" fill="#c44b2b" font-weight="500">01</text>
-        <text x="80" y="42" font-family="Noto Sans TC, sans-serif" font-size="13" fill="#1a1a2e" font-weight="500">建立專案，初始化 Git，建立 GitHub repo</text>
-        <text x="80" y="60" font-family="Noto Sans TC, sans-serif" font-size="11" fill="#6b6b7b">「幫我初始化 Git，然後在 GitHub 上建一個 repo」</text>
-        <line x1="330" y1="76" x2="330" y2="96" stroke="#d4d0c8" stroke-width="1.5"/>
-        <polygon points="326,93 330,100 334,93" fill="#d4d0c8"/>
-
-        <!-- Step 2 -->
-        <rect x="30" y="100" rx="10" ry="10" width="600" height="56" fill="#f0f4f8" stroke="#c0cfe0"/>
-        <text x="56" y="122" font-family="JetBrains Mono, monospace" font-size="12" fill="#c44b2b" font-weight="500">02</text>
-        <text x="80" y="122" font-family="Noto Sans TC, sans-serif" font-size="13" fill="#1a1a2e" font-weight="500">開發中：寫程式碼，做完一個小段落就 commit</text>
-        <text x="80" y="140" font-family="Noto Sans TC, sans-serif" font-size="11" fill="#6b6b7b">「幫我儲存目前的進度」→ Git 在你電腦上建立存檔點</text>
-        <line x1="330" y1="156" x2="330" y2="176" stroke="#d4d0c8" stroke-width="1.5"/>
-        <polygon points="326,173 330,180 334,173" fill="#d4d0c8"/>
-
-        <!-- Step 3 -->
-        <rect x="30" y="180" rx="10" ry="10" width="600" height="56" fill="#f0f7f4" stroke="#b7d8c6"/>
-        <text x="56" y="202" font-family="JetBrains Mono, monospace" font-size="12" fill="#c44b2b" font-weight="500">03</text>
-        <text x="80" y="202" font-family="Noto Sans TC, sans-serif" font-size="13" fill="#2d6a4f" font-weight="500">推送到 GitHub：把進度同步到雲端</text>
-        <text x="80" y="220" font-family="Noto Sans TC, sans-serif" font-size="11" fill="#6b6b7b">「幫我推到 GitHub 上」→ 雲端也有最新版本了</text>
-        <line x1="330" y1="236" x2="330" y2="256" stroke="#d4d0c8" stroke-width="1.5"/>
-        <polygon points="326,253 330,260 334,253" fill="#d4d0c8"/>
-
-        <!-- Step 4 -->
-        <rect x="30" y="260" rx="10" ry="10" width="600" height="56" fill="#f0f4f8" stroke="#c0cfe0"/>
-        <text x="56" y="282" font-family="JetBrains Mono, monospace" font-size="12" fill="#c44b2b" font-weight="500">04</text>
-        <text x="80" y="282" font-family="Noto Sans TC, sans-serif" font-size="13" fill="#1a1a2e" font-weight="500">反覆步驟 2-3，直到功能完成</text>
-        <text x="80" y="300" font-family="Noto Sans TC, sans-serif" font-size="11" fill="#6b6b7b">開發節奏：改動 → commit → push，改動 → commit → push</text>
-        <line x1="330" y1="316" x2="330" y2="336" stroke="#d4d0c8" stroke-width="1.5"/>
-        <polygon points="326,333 330,340 334,333" fill="#d4d0c8"/>
-
-        <!-- Step 5 -->
-        <rect x="30" y="340" rx="10" ry="10" width="600" height="56" fill="#fff9f0" stroke="#f0c89a"/>
-        <text x="56" y="362" font-family="JetBrains Mono, monospace" font-size="12" fill="#c44b2b" font-weight="500">05</text>
-        <text x="80" y="362" font-family="Noto Sans TC, sans-serif" font-size="13" fill="#b5651d" font-weight="500">換裝置時：Pull 拉最新版本回來</text>
-        <text x="80" y="380" font-family="Noto Sans TC, sans-serif" font-size="11" fill="#6b6b7b">「幫我拉一下 GitHub 上最新的版本」→ 從上次離開的地方繼續</text>
-      </svg>
+    <div class="diagram diagram--steps">
+      <ol class="step-flow">
+        <li class="step-flow-item">
+          <span class="step-flow-num">01</span>
+          <div class="step-flow-body">
+            <div class="step-flow-title">初始化專案</div>
+            <div class="step-flow-desc">建立 Git + GitHub repo</div>
+          </div>
+        </li>
+        <li class="step-flow-item">
+          <span class="step-flow-num">02</span>
+          <div class="step-flow-body">
+            <div class="step-flow-title">開發 + Commit</div>
+            <div class="step-flow-desc">做完一個段落就存檔</div>
+          </div>
+        </li>
+        <li class="step-flow-item is-highlight">
+          <span class="step-flow-num">03</span>
+          <div class="step-flow-body">
+            <div class="step-flow-title">Push 到 GitHub</div>
+            <div class="step-flow-desc">把進度同步到雲端</div>
+          </div>
+        </li>
+        <li class="step-flow-item">
+          <span class="step-flow-num">04</span>
+          <div class="step-flow-body">
+            <div class="step-flow-title">反覆 Commit + Push</div>
+            <div class="step-flow-desc">直到功能完成</div>
+          </div>
+        </li>
+        <li class="step-flow-item is-accent">
+          <span class="step-flow-num">05</span>
+          <div class="step-flow-body">
+            <div class="step-flow-title">換裝置時 Pull</div>
+            <div class="step-flow-desc">拉最新版本回來繼續</div>
+          </div>
+        </li>
+      </ol>
       <div class="diagram-caption">Vibe Coding 的日常節奏：commit（存檔）→ push（同步到雲端）→ pull（在另一台裝置繼續）</div>
     </div>
 
@@ -765,7 +853,7 @@
 
   <!-- Section 8 -->
   <section class="section">
-    <div class="section-number">16</div>
+    <div class="section-number">13</div>
     <h2>實戰：使用 gstack 的 Skill</h2>
 
     <p>回到你最初的問題：如果想使用 gstack 裡的某個特定 Skill，你可以怎麼做？</p>
@@ -829,12 +917,12 @@
 
   <!-- Section 9 -->
   <section class="section">
-    <div class="section-number">17</div>
+    <div class="section-number">14</div>
     <h2>Fork 同步更新時，不會覆蓋我的修改嗎</h2>
 
     <p>這是一個很直覺的擔心，但答案是：<strong>通常不會</strong>。</p>
 
-    <p>當你從原版同步更新到你的 fork 時，Git 會自動進行「合併」——它會把原版的新改動和你自己的修改整合在一起，而不是用原版去覆蓋你的東西。</p>
+    <p>當你從原版同步更新到你的 fork 時，Git 會自動進行「合併」，它會把原版的新改動和你自己的修改整合在一起，而不是用原版去覆蓋你的東西。</p>
 
     <div class="analogy">
       <div class="analogy-label">生活比喻</div>

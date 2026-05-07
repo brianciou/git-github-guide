@@ -23,7 +23,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   line-height: 1.85;
-  font-size: 16px;
+  font-size: 18px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -582,10 +582,12 @@ code {
 html, body { background: var(--paper); color: var(--ink); }
 body {
   font-family: 'Inter', 'Noto Sans TC', system-ui, sans-serif;
-  line-height: 1.75;
+  line-height: 1.7;
 }
 
-/* Serif display stack — DM Serif Display for Latin, Noto Serif TC for CJK */
+/* Serif display stack — DM Serif Display for Latin, Noto Serif TC for CJK
+   Latin 用 DM Serif Display 400（本身字重已偏粗）；CJK 用 Noto Serif TC 700 加粗。
+   font-synthesis: none 防止瀏覽器對缺少粗體的字型做 faux-bold。*/
 .hero h1,
 .part-divider h2,
 .section h2,
@@ -593,7 +595,8 @@ body {
 .toc-title,
 .key-point-title {
   font-family: 'DM Serif Display', 'Noto Serif TC', Georgia, serif;
-  font-weight: 400;
+  font-weight: 600;
+  font-synthesis: none;
   letter-spacing: -0.01em;
 }
 
@@ -645,7 +648,6 @@ body {
   line-height: 0.98;
   color: var(--ink);
   margin-bottom: 24px;
-  font-weight: 400;
 }
 .hero h1 span {
   font-style: italic;
@@ -842,22 +844,33 @@ body {
 .section-number::after { content: " ]"; }
 .section h2 {
   font-size: clamp(1.8rem, 3.2vw, 2.4rem);
-  line-height: 1.1;
+  line-height: 1.25;
   color: var(--ink);
-  font-weight: 400;
   margin-bottom: 24px;
 }
 .section h2 em, .section h2 i { font-style: italic; }
 .section h3 {
-  font-size: 1.5rem;
+  font-size: 1.85rem;
   font-style: italic;
   color: var(--ink);
-  margin-top: 40px;
-  margin-bottom: 14px;
+  margin-top: 56px;
+  margin-bottom: 18px;
 }
 
 p { color: var(--ink); }
 strong { color: var(--ink); font-weight: 600; }
+
+/* 內文原生 list（排除 .flow-list / .step-flow / .flow-notes 等已自訂的清單） */
+.section ol:not([class]),
+.section ul:not([class]) {
+  padding-left: 28px;
+  margin: 12px 0;
+}
+.section ol:not([class]) li,
+.section ul:not([class]) li {
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
 
 /* Inline code */
 code {
@@ -901,6 +914,11 @@ code {
   color: var(--ink);
   font-family: 'Inter', sans-serif;
   font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: block;
 }
 .analogy-label::before { content: "[ "; }
 .analogy-label::after { content: " ]"; }
@@ -929,6 +947,11 @@ code {
   color: var(--ink);
   font-family: 'Inter', sans-serif;
   font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: inline-block;
 }
 .prompt-label::before { content: "[ "; }
 .prompt-label::after { content: " ]"; }
@@ -958,9 +981,10 @@ code {
   border-radius: 24px;
   padding: 36px 28px;
 }
-.diagram svg { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+.diagram svg { max-width: 100%; height: auto; margin: 0 auto; }
+.diagram-svg-desktop { display: block; }
 .diagram-svg-mobile { display: none; }
-.diagram-caption { color: var(--muted); font-style: italic; font-family: 'DM Serif Display','Noto Serif TC',serif; margin-top: 14px; text-align: center; }
+.diagram-caption { color: var(--ink); font-style: italic; font-family: 'DM Serif Display','Noto Serif TC',serif; margin-top: 14px; text-align: center; }
 
 /* 抽出 SVG 的重點提示框，改用 HTML 讓文字能正常 reflow */
 .diagram-note {
@@ -975,7 +999,195 @@ code {
   line-height: 1.5;
 }
 .diagram-note strong { display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.95rem; }
-.diagram-note span { color: var(--ink); opacity: 0.7; font-size: 0.88rem; }
+.diagram-note span { color: var(--ink); opacity: 0.88; font-size: 0.95rem; }
+
+/* Section 11 — 手機版 Push/Pull/Clone：兩張卡片 + 線段式箭頭 + 註腳 */
+.flow-mobile { display: none; }
+
+/* 卡片：暖色（local）vs 冷色（remote）對比 */
+.flow-card {
+  border: 1.5px solid var(--ink);
+  border-radius: 16px;
+  padding: 16px 20px;
+}
+.flow-card--local { background: var(--aged); }
+.flow-card--remote { background: var(--sage); }
+.flow-card-title {
+  font-family: 'DM Serif Display', 'Noto Serif TC', serif;
+  font-size: 1.3rem;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.flow-card-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin: 4px 0 14px;
+}
+.flow-card-items { display: flex; flex-direction: column; gap: 6px; }
+.flow-card-items span {
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 0.88rem;
+  color: var(--ink);
+  text-align: center;
+}
+
+/* 中間：三條垂直箭頭並排，每條下方搭配動作名 */
+.flow-arrows {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 28px 16px 24px;
+  align-items: end;
+  justify-items: center;
+}
+.flow-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.flow-arrow-stem {
+  width: 2px;
+  height: 52px;
+  background: currentColor;
+  position: relative;
+}
+.flow-arrow-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+.flow-arrow-name sup {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 0.7em;
+  margin-left: 1px;
+  color: var(--muted);
+}
+/* 箭頭三角形：down 在 stem 底部，up 在 stem 頂部 */
+.flow-arrow--push .flow-arrow-stem::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid currentColor;
+}
+.flow-arrow--pull .flow-arrow-stem::before,
+.flow-arrow--clone .flow-arrow-stem::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -8px;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid currentColor;
+}
+/* 三種動作的色階區隔 */
+.flow-arrow--push { color: var(--ink); }
+.flow-arrow--pull { color: var(--muted); }
+.flow-arrow--clone { color: var(--ink); }
+.flow-arrow--clone .flow-arrow-stem {
+  background: repeating-linear-gradient(
+    to bottom,
+    currentColor 0 5px,
+    transparent 5px 10px
+  );
+}
+
+/* 註腳區 */
+.flow-notes {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px dashed var(--muted);
+  border-radius: 12px;
+}
+.flow-notes li {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.flow-notes li:last-child { margin-bottom: 0; }
+.flow-notes-mark {
+  display: inline-block;
+  min-width: 16px;
+  color: var(--ink);
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+.flow-notes strong {
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+
+/* Section 15 — Vibe Coding 流程：純 HTML 卡片，桌面 / 手機共用 */
+.diagram--steps { padding: 28px 24px; }
+.step-flow { list-style: none; padding: 0; margin: 0; counter-reset: none; }
+.step-flow-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  border-radius: 14px;
+  margin-bottom: 8px;
+  position: relative;
+}
+.step-flow-item::after {
+  content: "";
+  position: absolute;
+  left: 44px;
+  bottom: -8px;
+  width: 1px;
+  height: 8px;
+  background: var(--muted);
+  opacity: 0.5;
+}
+.step-flow-item:last-child { margin-bottom: 0; }
+.step-flow-item:last-child::after { display: none; }
+.step-flow-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 8px 0;
+  background: var(--paper);
+}
+.step-flow-title {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.step-flow-desc {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.step-flow-item.is-highlight { background: var(--sage); }
+.step-flow-item.is-highlight .step-flow-num { background: var(--surface); }
+.step-flow-item.is-accent {
+  background: var(--aged);
+  border-style: dashed;
+}
 
 @media (max-width: 600px) {
   .diagram { padding: 24px 16px; }
@@ -983,7 +1195,17 @@ code {
   .diagram-svg-mobile { display: block; }
   .diagram-note { padding: 14px 18px; }
   .diagram-note strong { font-size: 0.92rem; }
-  .diagram-note span { font-size: 0.85rem; }
+  .diagram-note span { font-size: 0.92rem; }
+
+  /* Section 11：手機顯示 HTML 卡片版 */
+  .flow-mobile { display: block; }
+
+  /* Section 15：步驟卡在手機下緊湊一點 */
+  .diagram--steps { padding: 20px 14px; }
+  .step-flow-item { grid-template-columns: 48px 1fr; gap: 14px; padding: 14px 16px; }
+  .step-flow-num { font-size: 0.92rem; padding: 7px 0; }
+  .step-flow-title { font-size: 1.05rem; }
+  .step-flow-desc { font-size: 0.95rem; }
 }
 
 /* Key point */
@@ -1023,6 +1245,20 @@ code {
   left: -15px;
   font-weight: 600;
 }
+/* 最後一項：自身 border 維持透明，改用 ::after 補一段 24px 短線（從 li 頂部
+   延伸到圓圈中央），剛好接續前一項的線。圓圈 ::before 設 z-index 確保
+   蓋在線之上，避免線穿過數字。 */
+.flow-list li::before { z-index: 1; }
+.flow-list li:last-child::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 1px;
+  height: 24px;
+  background: var(--ink);
+  z-index: 0;
+}
 
 /* Compare cards */
 .compare-card {
@@ -1038,6 +1274,14 @@ code {
 .compare-card.b .compare-label,
 .compare-card.bad .compare-label,
 .compare-card.a .compare-label { color: var(--ink); font-family: 'Inter', sans-serif; }
+.compare-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: inline-block;
+}
 .compare-label::before { content: "[ "; }
 .compare-label::after { content: " ]"; }
 
@@ -1099,6 +1343,7 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
 @media (max-width: 600px) {
   /* 防止任何寬元素把整頁撐橫向捲動 */
   html, body { overflow-x: clip; }
+  body { font-size: 18px; }
 
   .page-wrapper { padding: 56px 20px 80px; }
   .page-wrapper::before { top: 20px; right: 20px; font-size: 1.6rem; }
