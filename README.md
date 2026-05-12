@@ -4,7 +4,7 @@
 
 一份用「對 Claude Code 說的話」串起來的入門指南，讓你不用硬背指令，也能放心地用 Git 做版本控制、用 GitHub 做雲端備份與協作。
 
-🔗 **線上閱讀**：（部署後補上連結）
+🔗 **線上閱讀**：<https://brianciou.github.io/git-github-guide/>
 
 ---
 
