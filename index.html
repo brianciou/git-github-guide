@@ -500,22 +500,26 @@
   <div id="part-github" class="part-divider">
     <div class="part-label">Part 2</div>
     <h2>GitHub 基礎概念</h2>
-    <p>從本機到雲端，學會備份、分享、協作</p>
+    <p>從本機到雲端，學會備份、分享與協作</p>
   </div>
 
 <!-- Section 1 -->
   <section class="section">
-    <div class="section-number">06</div>
+    <div class="section-number">01</div>
     <h2>Git 跟 GitHub 的差別</h2>
 
-    <p>之前我們學了 Git，它是一套裝在你電腦上的版本控制工具，負責追蹤檔案的變更。但 Git 本身只在你自己的電腦上運作。</p>
+    <p>在 Part 1 裡，我們認識了 Git，那台幫專案做版本控制的「時光機」。透過 commit 跟分支，我們能在 Vibe Coding 的過程中放心嘗試各種想法，就算改壞了也能隨時回到完好的版本。</p>
 
-    <p>GitHub 則是一個「雲端平台」，讓你可以把 Git 管理的專案放到網路上。這樣一來，你可以在不同裝置之間同步、把專案分享給別人、或是使用別人公開分享的專案。</p>
+    <p>不過 Git 有個小限制：它的資料只儲存在自己的電腦裡。如果想把專案分享給朋友看看、或是拿別人分享的工具來用，光靠 Git 是還不夠的。這時候，我們就會需要一個「雲端」的橋樑，把 Git 所管理的專案推到網路上。</p>
+
+    <p>而這個角色，就是 <strong>GitHub</strong>。</p>
 
     <div class="analogy">
       <div class="analogy-label">生活比喻</div>
-      Git 就像你手上的相機，負責拍照和整理相簿。GitHub 就像 Google 相簿，讓你把相片放到雲端，可以跟別人共享，別人也可以從上面下載你的照片。相機（Git）跟雲端相簿（GitHub）是兩個獨立的東西，但搭配使用會非常方便。
+      Git 就像你手上的相機，負責拍照和整理相簿。GitHub 就像 Google 相簿，讓你把相片放到雲端，可以跟別人共享，別人也可以從上面下載你的照片。相機（Git）跟雲端相簿（GitHub）雖是兩個獨立的東西，但搭配起來使用會非常方便。
     </div>
+
+    <p>GitHub 不只是 Git 的雲端版本，它同時也是全世界最大的開源社群。對 Vibe Coder 來說，GitHub 既能讓自己的專案有雲端備份、跨裝置同步、跟人協作，也是一座可以盡情挖掘的寶藏，許多實用的工具與 Skill 都能在這裡找到。</p>
 
     <div class="key-point">
       <div class="key-point-title">簡單記法</div>
@@ -526,90 +530,97 @@
 
   <hr class="sep">
 
-  <!-- Section 2 -->
+  <!-- Section 7 -->
   <section class="section">
-    <div class="section-number">07</div>
-    <h2>Repository（倉庫）：GitHub 的基本單位</h2>
+    <div class="section-number">02</div>
+    <h2>認識 GitHub 上的專案資料夾</h2>
 
-    <p>在 GitHub 上，每一個專案都存放在一個叫 <strong>Repository</strong>（簡稱 repo）的地方。你可以把它想成一個雲端資料夾，裡面裝著一個專案的所有檔案和它的完整版本歷史。</p>
+    <p>在 GitHub 上，每一個專案都會放在一個叫做 <strong>Repository</strong>（簡稱 Repo）的地方。你可以把它想成一個雲端的專案資料夾，裡面除了裝著專案的所有檔案，還記錄著這份專案從第一個 commit 到現在的完整版本歷史。</p>
 
-    <p>以 gstack 為例，它的 repo 就長這樣：</p>
+    <p>換句話說，它跟你電腦上那個被 Git 管理的資料夾是「對應的」，只是一個在本地、一個在雲端。</p>
 
-    <div class="repo-card">
-      <div class="repo-card-header">
-        <div class="repo-card-icon"></div>
-        <span class="repo-card-name">garrytan / gstack</span>
-      </div>
-      <div class="repo-card-desc">Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA</div>
-      <div class="repo-card-stats">
-        <span>⭐ 10,000+ Stars</span>
-        <span>🍴 Forks</span>
-        <span>👥 Contributors</span>
-      </div>
-    </div>
+    <p>以 Anthropic 的 skills repo 為例，一個 Repo 頁面上常見的元素有這幾個：</p>
 
-    <p>一個 repo 頁面上你會看到幾個重要元素：</p>
+    <figure class="repo-screenshot">
+      <img src="assets/github-repo-skills.png" alt="Anthropic skills repo 在 GitHub 上的頁面截圖" loading="lazy">
+      <figcaption>Anthropic 的 <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener noreferrer">skills repo</a> 頁面</figcaption>
+    </figure>
 
-    <p><strong>README.md</strong> — 專案的「說明書」。大多數好的 repo 都會有一份 README，告訴你這個專案是什麼、怎麼安裝、怎麼使用。打開 gstack 的 repo，第一眼看到的就是它的 README。</p>
+    <p><strong>檔案列表（中間主區）</strong>：GitHub 會把專案裡所有的檔案與資料夾直接呈現在網頁上，不用下載也能線上瀏覽。</p>
 
-    <p><strong>Stars（星星）</strong> — 類似社群上的「按讚」。越多 Stars 通常代表越多人覺得這個專案有用。gstack 在發佈後兩天內就突破了一萬顆星星。</p>
+    <p><strong>README.md（檔案列表下方）</strong>：專案的說明書，告訴造訪者這個專案是什麼、怎麼用。</p>
 
-    <p><strong>Issues</strong> — 用來回報問題或提出建議的地方，有點像專案專屬的討論區。</p>
+    <p><strong>Star（右上角）</strong>：類似於社群上的「按讚」，數字越高通常代表越多人覺得它值得參考。</p>
 
-    <p><strong>檔案列表</strong> — 就是專案裡的所有檔案和資料夾。你可以直接在 GitHub 上瀏覽它們的內容。</p>
+    <p><strong>Issues（上方 tab）</strong>：回報 Bug 或提出建議的地方，有點像專案專屬的討論區。</p>
+
+    <p><strong>Pull requests（上方 tab）</strong>：其他人想把改動合併進來的請求，也就是後面會聊到的 PR。</p>
+
+    <p>理解了 Repo 是什麼後，接下來我們就能進一步去認識電腦上的 Git，要怎麼跟 GitHub 上的 Repo 互通有無。</p>
   </section>
 
   <hr class="sep">
 
-  <!-- Section 3 -->
+  <!-- Section 8 -->
   <section class="section">
-    <div class="section-number">08</div>
-    <h2>Push、Pull、Clone：Git 與 GitHub 之間的溝通方式</h2>
+    <div class="section-number">03</div>
+    <h2>本地與雲端之間的同步方式</h2>
 
-    <p>Git（你的電腦）和 GitHub（雲端）之間，靠三個動作來交換資料。把這三個搞懂，Git + GitHub 的複合使用就通了。</p>
+    <p>當專案同時存在於本地與雲端時，它們之間就需要一套溝通方式，讓兩邊隨時保持同步。GitHub 上最常用到的三個動作，就是 <strong>Push、Pull、Clone</strong>。</p>
 
     <div class="diagram">
       <!-- Desktop: 兩個方塊 + 三個動作箭頭 -->
       <svg class="diagram-svg-desktop" viewBox="0 0 660 280" width="100%" xmlns="http://www.w3.org/2000/svg">
-        <!-- 兩個容器 box -->
-        <rect x="30" y="40" rx="14" ry="14" width="240" height="200" fill="none" stroke="#1F3A2E" stroke-width="2"/>
-        <rect x="390" y="40" rx="14" ry="14" width="240" height="200" fill="none" stroke="#1F3A2E" stroke-width="2"/>
+        <!-- 兩個容器 box（左：本地白底；右：雲端 sage 淡底） -->
+        <rect x="30" y="40" rx="14" ry="14" width="240" height="200" fill="#FAFAF7" stroke="#1F3A2E" stroke-width="2"/>
+        <rect x="390" y="40" rx="14" ry="14" width="240" height="200" fill="#EEF6E8" stroke="#1F3A2E" stroke-width="2"/>
 
         <!-- 內層子方塊 -->
         <rect x="65" y="115" rx="8" ry="8" width="170" height="36" fill="#E8E3D8" stroke="#5A6B5C" stroke-width="1"/>
         <rect x="65" y="165" rx="8" ry="8" width="170" height="36" fill="#E8E3D8" stroke="#5A6B5C" stroke-width="1"/>
-        <rect x="425" y="115" rx="8" ry="8" width="170" height="36" fill="#E8E3D8" stroke="#5A6B5C" stroke-width="1"/>
-        <rect x="425" y="165" rx="8" ry="8" width="170" height="36" fill="#E8E3D8" stroke="#5A6B5C" stroke-width="1"/>
+        <rect x="425" y="115" rx="8" ry="8" width="170" height="36" fill="#D4E8C7" stroke="#4A6B54" stroke-width="1"/>
+        <rect x="425" y="165" rx="8" ry="8" width="170" height="36" fill="#D4E8C7" stroke="#4A6B54" stroke-width="1"/>
 
-        <!-- 三條動作線（push 深、pull 中、clone 淺虛線） -->
-        <line x1="275" y1="115" x2="383" y2="115" stroke="#1F3A2E" stroke-width="2.5" marker-end="url(#arrowInk)"/>
-        <line x1="383" y1="155" x2="275" y2="155" stroke="#5A6B5C" stroke-width="2" marker-end="url(#arrowMuted)"/>
-        <line x1="383" y1="200" x2="275" y2="200" stroke="#1F3A2E" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowInk)"/>
+        <!-- 三條動作線（全部細實線；線停在三角形底邊，避免延伸到三角形內） -->
+        <line x1="270" y1="115" x2="376" y2="115" stroke="#1F3A2E" stroke-width="1.6" marker-end="url(#arrowInk)"/>
+        <line x1="390" y1="155" x2="284" y2="155" stroke="#4A6B54" stroke-width="1.6" marker-end="url(#arrowMid)"/>
+        <line x1="390" y1="200" x2="284" y2="200" stroke="#8FB578" stroke-width="1.6" marker-end="url(#arrowSage)"/>
 
         <!-- 文字 -->
-        <text x="150" y="72" font-family="DM Serif Display, Noto Serif TC, serif" font-size="22" fill="#1F3A2E" text-anchor="middle">你的電腦</text>
-        <text x="150" y="94" font-family="JetBrains Mono, monospace" font-size="14" fill="#5A6B5C" text-anchor="middle">（本地 Git repo）</text>
-        <text x="150" y="138" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#1F3A2E" text-anchor="middle">你的專案檔案</text>
-        <text x="150" y="188" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#1F3A2E" text-anchor="middle">Git 版本歷史</text>
+        <text x="150" y="72" font-family="DM Serif Display, Noto Serif TC, serif" font-size="20" fill="#1F3A2E" text-anchor="middle" font-weight="700">你的電腦</text>
+        <text x="150" y="94" font-family="JetBrains Mono, monospace" font-size="13" fill="#5A6B5C" text-anchor="middle">（本地 Git repo）</text>
+        <text x="150" y="138" font-family="Noto Sans TC, sans-serif" font-size="14" fill="#1F3A2E" text-anchor="middle">你的專案檔案</text>
+        <text x="150" y="188" font-family="Noto Sans TC, sans-serif" font-size="14" fill="#1F3A2E" text-anchor="middle">Git 版本歷史</text>
 
-        <text x="510" y="72" font-family="DM Serif Display, Noto Serif TC, serif" font-size="22" fill="#1F3A2E" text-anchor="middle">GitHub</text>
-        <text x="510" y="94" font-family="JetBrains Mono, monospace" font-size="14" fill="#5A6B5C" text-anchor="middle">（雲端 repo）</text>
-        <text x="510" y="138" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#1F3A2E" text-anchor="middle">雲端的檔案副本</text>
-        <text x="510" y="188" font-family="Noto Sans TC, sans-serif" font-size="15" fill="#1F3A2E" text-anchor="middle">雲端的版本歷史</text>
+        <text x="510" y="72" font-family="DM Serif Display, Noto Serif TC, serif" font-size="20" fill="#1F3A2E" text-anchor="middle">GitHub</text>
+        <text x="510" y="94" font-family="JetBrains Mono, monospace" font-size="13" fill="#5A6B5C" text-anchor="middle">（雲端 repo）</text>
+        <text x="510" y="138" font-family="Noto Sans TC, sans-serif" font-size="14" fill="#1F3A2E" text-anchor="middle">雲端的檔案副本</text>
+        <text x="510" y="188" font-family="Noto Sans TC, sans-serif" font-size="14" fill="#1F3A2E" text-anchor="middle">雲端的版本歷史</text>
 
-        <text x="330" y="107" font-family="JetBrains Mono, monospace" font-size="15" fill="#1F3A2E" text-anchor="middle" font-weight="500">push</text>
-        <text x="330" y="147" font-family="JetBrains Mono, monospace" font-size="15" fill="#5A6B5C" text-anchor="middle" font-weight="500">pull</text>
-        <text x="330" y="192" font-family="JetBrains Mono, monospace" font-size="15" fill="#1F3A2E" text-anchor="middle" font-weight="500">clone</text>
+        <text x="330" y="106" font-family="JetBrains Mono, monospace" font-size="13" fill="#1F3A2E" text-anchor="middle" font-weight="600">push</text>
+        <text x="330" y="146" font-family="JetBrains Mono, monospace" font-size="13" fill="#4A6B54" text-anchor="middle" font-weight="600">pull</text>
+        <text x="330" y="191" font-family="JetBrains Mono, monospace" font-size="13" fill="#4A6B54" text-anchor="middle" font-weight="600">clone</text>
 
         <defs>
-          <marker id="arrowInk" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <polygon points="0 0, 8 3, 0 6" fill="#1F3A2E"/>
+          <!-- refX=0：三角形底邊對齊線的終點，apex 再延伸 14 個單位（線不會出現在三角形內） -->
+          <marker id="arrowInk" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="12" refX="0" refY="6" orient="auto">
+            <polygon points="0 0, 14 6, 0 12" fill="#1F3A2E"/>
           </marker>
-          <marker id="arrowMuted" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <polygon points="0 0, 8 3, 0 6" fill="#5A6B5C"/>
+          <marker id="arrowMid" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="12" refX="0" refY="6" orient="auto">
+            <polygon points="0 0, 14 6, 0 12" fill="#4A6B54"/>
+          </marker>
+          <marker id="arrowSage" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="12" refX="0" refY="6" orient="auto">
+            <polygon points="0 0, 14 6, 0 12" fill="#8FB578"/>
           </marker>
         </defs>
       </svg>
+
+      <!-- Desktop legend：簡短說明三個動作 -->
+      <ul class="flow-legend">
+        <li><span class="flow-legend-dot flow-legend-dot--push"></span><span class="flow-legend-text"><code>push</code>：把本地的改動推到雲端</span></li>
+        <li><span class="flow-legend-dot flow-legend-dot--pull"></span><span class="flow-legend-text"><code>pull</code>：把雲端最新版本拉回本地</span></li>
+        <li><span class="flow-legend-dot flow-legend-dot--clone"></span><span class="flow-legend-text"><code>clone</code>：第一次將整個專案複製下來</span></li>
+      </ul>
 
       <!-- Mobile: 直立堆疊卡片 + 線段式箭頭 + 註腳 -->
       <div class="flow-mobile">
@@ -653,263 +664,69 @@
         </ul>
       </div>
 
-      <div class="diagram-caption">Git（本地）與 GitHub（雲端）之間的三個核心操作</div>
     </div>
 
-    <h3>Clone — 第一次取得專案</h3>
+    <h3>Push：把本地的改動推上雲端</h3>
+    <p>當我們在電腦上完成修改、並用 commit 存好進度後，這些變更都還只儲存在電腦裡。如果想讓 GitHub 也有這份檔案，就需要透過 <code>push</code>（推送），把專案從本地「推」上雲端的 Repo。</p>
 
-    <p>在 GitHub 上看到一個想用的專案，你需要把它整份「下載」到你的電腦上。Clone 會把專案的所有檔案連同完整版本歷史一起複製過來。</p>
+    <p>對 Vibe Coder 來說，Push 最大的好處有兩個：一是<strong>買個保險做雲端備份</strong>，不用怕電腦出狀況讓心血泡湯；二是<strong>方便分享</strong>，不管是要給朋友看，還是開源讓大家下載，都可以透過 push 來讓大家瀏覽專案成果。</p>
 
-    <div class="code-block">
-      <span class="comment"># 把 gstack 的 repo clone 到你電腦上</span><br>
-      <span class="cmd">git clone</span> <span class="string">https://github.com/garrytan/gstack.git</span>
+    <div class="prompt">
+      <div class="prompt-label">第一次推送</div>
+      <p>「這是我在 GitHub 上建立的 Repo 網址 [貼上網址]，請幫我把目前的本地專案推上去」</p>
     </div>
 
-    <p>Clone 只需要做一次。拿到之後，後續的同步就靠 push 和 pull。</p>
-
-    <h3>Push — 把你的改動「推」到 GitHub 上</h3>
-
-    <p>你在電腦上做了改動、commit 了存檔之後，這些變更目前只在你的電腦上。Push 就是把這些 commit 「推」到 GitHub 上的 repo，讓雲端也同步到最新狀態。</p>
-
-    <div class="analogy">
-      <div class="analogy-label">生活比喻</div>
-      你在 Word 裡改完文件之後，按了「儲存」只是存在你的電腦上。Push 就像是再多按一個「上傳到 Google Drive」，讓雲端也有最新的版本。
+    <div class="prompt">
+      <div class="prompt-label">後續更新</div>
+      <p>「幫我把目前的進度推到 GitHub 上」</p>
     </div>
 
-    <h3>Pull — 把 GitHub 上的最新狀態「拉」回來</h3>
+    <h3>Pull：把雲端的最新狀態拉回本地</h3>
+    <p>反過來說，如果你換了一台裝置想繼續開發、或在 GitHub 上編輯了某個檔案，那此時電腦上的版本就不是最新的了。這時候就需要 <code>pull</code>，把 GitHub 上最新的改動「拉」回本地，讓兩邊重新對齊。</p>
 
-    <p>如果你在另一台電腦上改過東西（或是有其他人改了），你電腦上的版本就不是最新的了。Pull 就是把 GitHub 上的最新改動「拉」回你的電腦，讓本地同步到最新。</p>
+    <p>像是平常在桌機上開發、週末想換筆電繼續做一點，只要先在筆電上 pull 一下，就能接著桌機的進度往下做。</p>
+
+    <div class="prompt">
+      <div class="prompt-label">對 Claude Code 說</div>
+      <p>「拉一下 GitHub 上最新的版本」<br>→ Claude Code 會把雲端最新的 commit 抓下來合併到本地，讓本地專案也同步到最新狀態</p>
+    </div>
+
+    <h3>Clone：把雲端的專案抓下來</h3>
+    <p>前面兩個動作是針對「自己手上的專案」做同步，而 <code>clone</code> 則是用在當你在 GitHub 上看到一個想用或想參考的專案時。它會把這個專案裡的所有檔案，連同完整的版本歷史一起複製過來。</p>
+
+    <p>複製完之後，電腦上就會有一份能直接用 Git 管理的本地專案副本，可以開啟、編輯，也可以接著往下開發與調整。</p>
 
     <div class="key-point">
-      <div class="key-point-title">三個動作的簡單記法</div>
-      <strong>Clone</strong> = 第一次複製整個專案下來（只做一次）<br>
-      <strong>Push</strong> = 把我的改動推到雲端（電腦 → GitHub）<br>
-      <strong>Pull</strong> = 把雲端的最新改動拉下來（GitHub → 電腦）
+      <div class="key-point-title">Clone 跟「下載」差在哪？</div>
+      在 GitHub 的 Repo 頁面點開那顆綠色的 <strong>Code</strong> 按鈕時，除了 Clone 之外，也會看到一個「<strong>Download ZIP</strong>」的選項，兩者最大的差別就在於：Download ZIP 只會打包當下的檔案內容，是一份脫離 Git 管理的靜態副本，下載下來之後就只是一般資料夾，沒有任何版本紀錄；而 Clone 會把整個版本歷史一起帶下來，讓你能在本地用 Git 隨時查看過往的 commit、切換分支，或回到某個歷史版本繼續往下開發。
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-label">對 Claude Code 說</div>
+      <p>「把這個 GitHub 上的專案 [貼上網址] clone 到我的電腦」</p>
+    </div>
+
+    <h3>養成本地與雲端同步的節奏</h3>
+    <p>簡單回顧一下這三個操作：</p>
+
+    <p><strong>Push</strong>：把本地的改動推到雲端（電腦 → GitHub）</p>
+    <p><strong>Pull</strong>：把雲端的最新版本拉回本地（GitHub → 電腦）</p>
+    <p><strong>Clone</strong>：把整個專案完整複製下來，包含所有版本歷史</p>
+
+    <p>在這三個動作裡，最值得帶進日常開發的，是 <strong>Commit 與 Push</strong> 這組雙層備份的操作：每完成一個小修改就先 commit 起來，把進度存在本地；當功能告一段落、或完成大項目的開發時，再 push 到 GitHub 做雲端備份。</p>
+
+    <div class="prompt">
+      <div class="prompt-label">於本機開發的過程中</div>
+      <p>「commit 目前的進度」</p>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-label">功能完成後</div>
+      <p>「把目前的進度 push 到 GitHub 上」</p>
     </div>
 
     <div class="tip">
-      使用 Claude Code 的話，你可以說「幫我把目前的進度推到 GitHub 上」或「幫我拉一下 GitHub 上最新的版本」，不需要記指令。
-    </div>
-  </section>
-
-  <hr class="sep">
-
-  <!-- Section 4 -->
-  <section class="section">
-    <div class="section-number">09</div>
-    <h2>Fork（分叉）：在你的帳號下複製一份</h2>
-
-    <p>Fork 是 GitHub 上一個很重要的概念，也是你特別問到的。它跟 Clone 很像，但有一個關鍵差別：</p>
-
-    <div class="compare-grid">
-      <div class="compare-card a">
-        <div class="compare-label">CLONE</div>
-        <p>把別人的 repo 複製到<strong>你的電腦</strong>上</p>
-        <p>你拿到的是一份本地的副本</p>
-        <p>跟原本的 repo 沒有「連結」關係</p>
-        <p style="color:var(--muted);font-size:0.88em">→ 「我只是想用這個東西」</p>
-      </div>
-      <div class="compare-card b">
-        <div class="compare-label">FORK</div>
-        <p>把別人的 repo 複製到<strong>你的 GitHub 帳號</strong>上</p>
-        <p>你擁有一個獨立的雲端副本</p>
-        <p>跟原本的 repo 保持「上下游」關係</p>
-        <p style="color:var(--muted);font-size:0.88em">→ 「我想改東西，而且可能想回饋給原作者」</p>
-      </div>
-    </div>
-
-    <div class="analogy">
-      <div class="analogy-label">生活比喻</div>
-      Clone 是去圖書館影印一本書回家看。Fork 是在圖書館的系統裡「借閱」一本書到你自己的書架上，這本書在你的帳號下，你可以在上面做筆記、改內容。如果你做了很好的註解，你還可以建議圖書館把你的註解加進原版裡面。
-    </div>
-
-    <h3>什麼時候用 Fork？</h3>
-
-    <p><strong>想客製化別人的專案</strong> — 假設你覺得 gstack 的某個 Skill 很好，但想根據你自己的工作流程調整，你就可以 fork 一份到你的帳號下，自由修改而不影響原版。</p>
-
-    <p><strong>想貢獻改進給原作者</strong> — 如果你在使用過程中發現了 Bug 或想到了改進方式，你可以在你的 fork 裡改好，然後透過「Pull Request」提交給原作者審閱。</p>
-
-    <p>Fork 的操作很簡單，在 GitHub 的 repo 頁面右上角，有一個「Fork」按鈕，點下去就完成了。你的帳號下就會多出一個完全一樣的 repo，它下方會標注「forked from garrytan/gstack」。</p>
-  </section>
-
-  <hr class="sep">
-
-  <!-- Section 5 -->
-  <section class="section">
-    <div class="section-number">10</div>
-    <h2>Contributors（貢獻者）是怎麼來的</h2>
-
-    <p>你在 gstack 的 repo 上看到了 Contributors，好奇他們是不是「一起協作來優化這個專案」，答案是對的，但他們的協作方式跟你想的可能不太一樣。</p>
-
-    <p>在開源專案中，Contributors <strong>通常不是被邀請進來的</strong>。大部分的流程是這樣的：</p>
-
-    <ol class="flow-list">
-      <li data-step="1">某個人在使用 gstack 時發現了一個 Bug，或覺得某個功能可以做得更好</li>
-      <li data-step="2">他把 gstack 的 repo fork 到自己的帳號下</li>
-      <li data-step="3">在自己的 fork 裡做修改（修 Bug、加功能、改文件）</li>
-      <li data-step="4">改好之後，提交一個 Pull Request 給原作者（Garry Tan）</li>
-      <li data-step="5">Garry Tan（或其他維護者）審查這個修改，覺得不錯就「合併」進去</li>
-      <li data-step="6">一旦被合併，這個人就自動成為 Contributor</li>
-    </ol>
-
-    <p>所以 Contributor 不是一個「被指派的角色」，而是一個「用行動贏得的標籤」。任何人都可以透過 Fork → 修改 → Pull Request 的流程來成為某個專案的 Contributor。</p>
-
-    <div class="key-point">
-      <div class="key-point-title">這就是開源的精神</div>
-      開源專案的原始碼是公開的，任何人都可以看、可以用、可以改。而 GitHub 上的 Fork + Pull Request 機制，就是讓這種「眾人協作」能夠有秩序地進行的制度。原作者保有最終決定權（要不要合併你的修改），貢獻者也不需要取得特別的權限才能參與。
-    </div>
-  </section>
-
-  <hr class="sep">
-
-  <!-- Section 6 -->
-  <section class="section">
-    <div class="section-number">11</div>
-    <h2>Pull Request（PR）：提交你的改動</h2>
-
-    <p>Pull Request 是 GitHub 上最重要的協作機制。名字聽起來有點奇怪，但概念很簡單：</p>
-
-    <p>你在自己的 fork 裡做了改動，然後「請求」原作者把你的改動「拉（pull）」進他的 repo 裡。這個「請求」就是 Pull Request。</p>
-
-    <div class="analogy">
-      <div class="analogy-label">生活比喻</div>
-      想像一本共同編輯的食譜。你覺得某道菜的做法可以改進，但你不能直接去改主廚的版本。你的做法是：先抄一份回家（Fork），在你的版本上改好（修改），然後把你的版本寄給主廚看（Pull Request）。主廚看了覺得不錯，就把你的改法加進正式版本裡（Merge）。
-    </div>
-
-    <p>一個 Pull Request 裡通常會包含：</p>
-
-    <p><strong>標題和說明</strong> — 你改了什麼、為什麼要改</p>
-    <p><strong>具體的程式碼改動</strong> — GitHub 會用紅色和綠色標出哪些行被刪除、哪些行被新增</p>
-    <p><strong>討論區</strong> — 原作者和其他人可以在這裡提問、給建議、要求修改</p>
-
-    <p>Pull Request 不是「丟出去就結束」。它更像是一場對話，原作者可能會說「這邊可以再改一下」，你就回去修改後再更新。直到雙方都滿意了，才會合併進去。</p>
-  </section>
-
-  <hr class="sep">
-
-  <!-- Section 7 -->
-  <section class="section">
-    <div class="section-number">12</div>
-    <h2>Vibe Coding 時的 Git + GitHub 實務流程</h2>
-
-    <p>了解了個別的操作之後，來看看 Vibe Coding 時，整個流程串起來會長什麼樣子：</p>
-
-    <div class="diagram diagram--steps">
-      <ol class="step-flow">
-        <li class="step-flow-item">
-          <span class="step-flow-num">01</span>
-          <div class="step-flow-body">
-            <div class="step-flow-title">初始化專案</div>
-            <div class="step-flow-desc">建立 Git + GitHub repo</div>
-          </div>
-        </li>
-        <li class="step-flow-item">
-          <span class="step-flow-num">02</span>
-          <div class="step-flow-body">
-            <div class="step-flow-title">開發 + Commit</div>
-            <div class="step-flow-desc">做完一個段落就存檔</div>
-          </div>
-        </li>
-        <li class="step-flow-item is-highlight">
-          <span class="step-flow-num">03</span>
-          <div class="step-flow-body">
-            <div class="step-flow-title">Push 到 GitHub</div>
-            <div class="step-flow-desc">把進度同步到雲端</div>
-          </div>
-        </li>
-        <li class="step-flow-item">
-          <span class="step-flow-num">04</span>
-          <div class="step-flow-body">
-            <div class="step-flow-title">反覆 Commit + Push</div>
-            <div class="step-flow-desc">直到功能完成</div>
-          </div>
-        </li>
-        <li class="step-flow-item is-accent">
-          <span class="step-flow-num">05</span>
-          <div class="step-flow-body">
-            <div class="step-flow-title">換裝置時 Pull</div>
-            <div class="step-flow-desc">拉最新版本回來繼續</div>
-          </div>
-        </li>
-      </ol>
-      <div class="diagram-caption">Vibe Coding 的日常節奏：commit（存檔）→ push（同步到雲端）→ pull（在另一台裝置繼續）</div>
-    </div>
-
-    <p>最核心的節奏就是 <strong>commit → push</strong> 這個循環。Commit 是在你電腦上存檔，push 是同步到雲端。養成「做完一個小段落就 commit + push」的習慣，你的專案就永遠有雲端備份。</p>
-
-    <div class="key-point">
-      <div class="key-point-title">什麼時候要 push？</div>
-      沒有硬性規定，但幾個好的時機：做完一個功能的時候、一天結束要離開電腦前、重要的改動之後。簡單說，只要你覺得「這個進度不想丟失」，就 push 一下。
-    </div>
-
-    <p>如果你要嘗試風險比較大的改動，流程會多一步：先開分支，在分支上開發，確認沒問題後合併回 main，最後 push 到 GitHub。</p>
-
-    <div class="tip">
-      整個流程你都可以用自然語言跟 Claude Code 說。它知道怎麼把「幫我推到 GitHub」翻譯成 <code>git push</code>、把「幫我從 GitHub 拉最新的」翻譯成 <code>git pull</code>。
-    </div>
-  </section>
-
-  <hr class="sep">
-
-  <!-- Section 8 -->
-  <section class="section">
-    <div class="section-number">13</div>
-    <h2>實戰：使用 gstack 的 Skill</h2>
-
-    <p>回到你最初的問題：如果想使用 gstack 裡的某個特定 Skill，你可以怎麼做？</p>
-
-    <h3>情境 A：直接使用整套 gstack</h3>
-
-    <p>gstack 有提供一鍵安裝的指令。你只需要在 Claude Code 裡貼上安裝指令，它就會自動 clone 整個 repo 到你電腦上，然後執行設定。</p>
-
-    <div class="code-block">
-      <span class="comment"># gstack 的官方安裝方式</span><br>
-      <span class="cmd">git clone</span> <span class="flag">--single-branch --depth 1</span> <span class="string">https://github.com/garrytan/gstack.git</span> ~/.claude/skills/gstack<br>
-      <span class="cmd">cd</span> ~/.claude/skills/gstack && <span class="cmd">./setup</span>
-    </div>
-
-    <p>安裝後，gstack 的檔案會存放在 <code>~/.claude/skills/gstack/</code> 這個路徑。<code>~</code> 代表你電腦的使用者主目錄，<code>.claude</code> 是 Claude Code 的設定資料夾（前面的小數點代表它是一個隱藏資料夾）。所以它其實就在你電腦裡 Claude Code 自己的 Skill 目錄下。</p>
-
-    <p>這裡有兩個你可能沒見過的參數：</p>
-
-    <p><code>--single-branch</code> 只下載主要分支，不需要所有分支的歷史</p>
-    <p><code>--depth 1</code> 只下載最新一次的 commit，不需要完整歷史。這兩個加在一起，讓下載速度快很多。</p>
-
-    <div class="tip">
-      你可以直接跟 Claude Code 說「幫我安裝 gstack」，然後把 GitHub 連結貼給它。Claude Code 會幫你跑完上面這些步驟。
-    </div>
-
-    <h3>情境 B：只想參考某個特定 Skill 的寫法</h3>
-
-    <p>如果你不想安裝整套 gstack，只想看某個 Skill（比如 /qa 或 /design-review）是怎麼寫的，你有幾個做法：</p>
-
-    <p><strong>直接在 GitHub 上瀏覽</strong> — 打開 gstack 的 repo，點進對應的資料夾（例如 <code>qa/SKILL.md</code>），就能直接在網頁上看到完整的 Skill 內容。不需要下載任何東西。</p>
-
-    <p><strong>Clone 下來本地研究</strong> — 如果你想更仔細地研究多個 Skill 的結構，可以整個 clone 下來慢慢看。</p>
-
-    <div class="warning">
-      <strong>Git 的 clone 不能只抓 repo 裡的某個資料夾</strong>。Git 的設計是以整個 repo 為單位來管理的，所以你只能 clone 整份，不能指定「只要 qa 這個資料夾」。不過如果只是想看某個檔案的內容，直接在 GitHub 網頁上瀏覽是最快的方式。
-    </div>
-
-    <h3>情境 C：想在 gstack 的基礎上做自己的版本</h3>
-
-    <p>如果你覺得 gstack 的某個 Skill 很好，但想根據自己的需求調整，這時候就適合用 Fork：</p>
-
-    <ol class="flow-list">
-      <li data-step="1">在 GitHub 上按 Fork，複製一份到你的帳號下</li>
-      <li data-step="2">Clone 你自己的 fork 到電腦上</li>
-      <li data-step="3">修改你想調整的 Skill 檔案</li>
-      <li data-step="4">Commit 並 push 到你自己的 GitHub repo 上</li>
-    </ol>
-
-    <p>這樣你就有了一份屬於你自己的 gstack，可以自由客製化。而且因為是 Fork，未來原版更新時，你也可以把最新的改動同步過來。（會不會覆蓋你的修改？下一節解答。）</p>
-
-    <div class="key-point">
-      <div class="key-point-title">回顧整個流程</div>
-      GitHub 的核心操作其實就是這幾個動作的排列組合：<br><br>
-      <strong>只想用</strong> → Clone 下來就好<br>
-      <strong>想改、想客製</strong> → 先 Fork，再 Clone 你的 fork<br>
-      <strong>想回饋給原作者</strong> → Fork → 修改 → 發 Pull Request
+      這樣的安排，能讓我們在保持心流的同時，每一段進度也都有著雙層備份。再也不用擔心電腦突然出狀況，過去幾個小時的努力就跟著消失。
     </div>
   </section>
 
@@ -917,44 +734,116 @@
 
   <!-- Section 9 -->
   <section class="section">
-    <div class="section-number">14</div>
-    <h2>Fork 同步更新時，不會覆蓋我的修改嗎</h2>
+    <div class="section-number">04</div>
+    <h2>用 Fork 在 GitHub 上建立專案副本</h2>
 
-    <p>這是一個很直覺的擔心，但答案是：<strong>通常不會</strong>。</p>
+    <p>到這裡，我們已經知道可以透過 push 與 pull 讓本地跟雲端同步，並用 clone 把公開的專案複製下來。但 GitHub 上還有一個更有趣的操作，那就是 <strong>Fork（分叉）</strong>。</p>
 
-    <p>當你從原版同步更新到你的 fork 時，Git 會自動進行「合併」，它會把原版的新改動和你自己的修改整合在一起，而不是用原版去覆蓋你的東西。</p>
+    <h3>Clone 跟 Fork，差在哪裡呢</h3>
+    <p>兩個動作都是「複製別人的專案」，但複製的「位置」跟「關係」完全不同。舉個情境來說明：你在 GitHub 上看到一個很實用的 Skill，想拿來用用看的時候：</p>
+
+    <div class="compare-grid">
+      <div class="compare-card a">
+        <div class="compare-label">Clone</div>
+        <ul class="compare-list">
+          <li>把這個 Skill 複製到<strong>你的電腦</strong>上</li>
+          <li>你可以打開、修改、使用，但這份副本只存在於本地</li>
+          <li>跟原作者的 Repo 沒有任何關係</li>
+          <li>電腦壞掉，副本就跟著消失</li>
+        </ul>
+      </div>
+      <div class="compare-card b">
+        <div class="compare-label">Fork</div>
+        <ul class="compare-list">
+          <li>把這個 Skill 複製到<strong>你的 GitHub 帳號</strong>下</li>
+          <li>變成一個你完全擁有的雲端 Repo</li>
+          <li>跟原版會保持「上下游」的連結關係</li>
+          <li>永遠都在，且能跟原版互通</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Fork 與原版之間的「上下游」關係</h3>
+    <p>Fork 的特別之處，在於會跟原版保持「上下游」的連結。你的 fork 是「下游」，原作者的 Repo 是「上游」。</p>
+
+    <p>這個連結最大的好處是：你可以在自己的 fork 裡自由調整，而當原版有了新功能或 Bug 修正時，可以選擇把這些更新「同步」回你的 fork，讓你的版本既保留客製化內容，又能跟著原版一起進化。</p>
+
+    <p>不過，看到這裡可能會想說：在同步原版的更新時，自己所做的調整會不會被覆蓋掉呢？</p>
+
+    <p><strong>大多數情況下，是不會的。</strong>當我們把原版的最新版本同步到自己的 fork 時，Git 會自動進行「合併（Merge）」，把原版的新改動跟你自己的修改整合在一起，而不是用原版去覆蓋你的內容。</p>
+
+    <p>只有一種情況需要你手動介入：當你跟原作者改到了「同一個檔案的同一段內容」時，那麼 Git 就會跟你說「這裡有衝突，請選擇要保留哪個版本」，這就是在 Part 1 裡談過的<strong>衝突（Conflict）</strong>。</p>
+
+    <div class="key-point">
+      <div class="key-point-title">三種情況的應對</div>
+      <ul class="key-point-list">
+        <li>你改了 A 檔案、原作者改了 B 檔案 → 完全不衝突，兩邊改動都會自動保留</li>
+        <li>你跟原作者都改了同一個檔案，但改的是不同段落 → Git 通常也能自動合併</li>
+        <li>你跟原作者改了同一個檔案的同一段 → Git 會提醒衝突，讓你決定保留哪個版本</li>
+      </ul>
+    </div>
+
+    <h3>Vibe Coder 可以如何用 Fork</h3>
+    <p>對 Vibe Coder 來說，Fork 最常出現在這幾個情境：</p>
+
+    <p><strong>客製化別人的 Skill</strong>：看到一個很實用的 Skill，但想根據自己的工作習慣調整。這時候 fork 一份回來，就能自由修改成自己的版本，而不會動到原作者的東西。</p>
+
+    <p><strong>延伸開源的專案</strong>：在 GitHub 上看到一個有趣的小工具或範本，想拿來改成自己的版本時，那麼就可以透過 Fork 來在自己的帳號下持續開發，未來也能跟原版同步更新。</p>
+
+    <p><strong>保留學習用的副本</strong>：想研究別人的專案是怎麼寫的，Fork 一份在自己帳號下，就能放心地拆解、實驗、嘗試各種改法。</p>
+
+    <p>操作上也很簡單，在 GitHub 的 Repo 頁面右上角會有一個「Fork」按鈕，點下去之後，你的帳號底下就會多出一個一模一樣的 Repo，下方會標注「forked from xxx」，告訴我們這是從哪裡分叉出來的。</p>
+  </section>
+
+  <hr class="sep">
+
+  <!-- Section 10 -->
+  <section class="section">
+    <div class="section-number">05</div>
+    <h2>透過 Pull Request 來為 GitHub 做出開源貢獻</h2>
+
+    <p>介紹完 Fork，GitHub 上還有一個值得認識的功能是 <strong>Pull Request</strong>（簡稱 PR）。</p>
+
+    <p>雖然這名稱看起來有點不直覺又繞口，但概念其實很單純：當我們在 fork 裡做了調整，若有嘗試出更好的方法或修掉某個 Bug，此時就可以透過 PR 請原作者把你所做的優化「拉（pull）」進他的 Repo 裡。</p>
 
     <div class="analogy">
       <div class="analogy-label">生活比喻</div>
-      想像你跟原作者各自在編輯同一本書的不同章節。你改了第三章，原作者新增了第七章。同步更新時，Git 會說：「第三章用你的版本，第七章用原作者新增的」，兩邊的修改都保留。
+      想像一本共同編輯的食譜。你覺得某道菜的做法可以改進，但不能直接去改主廚的版本。你的做法是：先抄一份回家（Fork），在你的版本上改好（修改），然後把你的版本寄給主廚看（Pull Request）。主廚看了覺得不錯，就把你的改法加進正式版本裡（Merge）。
     </div>
 
-    <p>只有一種情況會需要你手動介入：當你跟原作者<strong>改了同一個檔案的同一個地方</strong>。這時候 Git 會跟你說「這裡有衝突，你想用哪個版本？」讓你自己決定。這就是我們之前學過的「衝突」。</p>
+    <p>一個 PR 通常會包含幾個關鍵資訊：</p>
+
+    <p><strong>標題與說明</strong>：改了什麼、為什麼這樣改</p>
+    <p><strong>改動的內容</strong>：GitHub 會把改了哪些檔案、新增或調整了哪些段落都列出來，方便原作者查看</p>
+    <p><strong>討論區</strong>：原作者跟其他人可以在這裡留言、提問或給建議</p>
+
+    <p>值得注意的是，PR 通常不是「丟出去就結束」。它更像是一場對話，原作者可能會說「這邊可以再調整一下」，你就回去修改、再更新 PR。直到最後都調整好時，才會正式合併進原版。</p>
+
+    <h3>當被合併的那一刻，就能成為 Contributor 的一員</h3>
+    <p>當原作者審閱完 PR、覺得改得不錯按下「Merge」之後，你的改動就正式進到了原版的 Repo 裡，同時你的名字也會出現在 Contributors 名單上。</p>
+
+    <p>這也正是在逛 GitHub 時，在 Repo 頁面上會看到的 Contributors 名單，這些人正是靠著「主動貢獻」成為其中一員的。其實每個人都能透過 <strong>Fork → 修改 → PR</strong> 的流程，成為某個專案的 Contributor。</p>
 
     <div class="key-point">
-      <div class="key-point-title">三種情況</div>
-      <strong>你改了 A 檔案，原版改了 B 檔案</strong> → 完全不衝突，兩邊的改動都自動保留<br><br>
-      <strong>你跟原版都改了同一個檔案，但改的是不同段落</strong> → Git 通常也能自動合併<br><br>
-      <strong>你跟原版改了同一個檔案的同一段</strong> → Git 會提醒你有衝突，讓你選擇保留哪個版本
-    </div>
-
-    <p>在實務上，如果你 fork 的是一個大型專案（像 gstack 有幾十個 Skill 檔案），而你只改了其中一兩個，跟原版衝突的機率非常低。大部分時候同步更新都是自動、無痛的。</p>
-
-    <div class="tip">
-      遇到衝突也不用擔心。跟 Claude Code 說「幫我同步原版的最新更新」，如果有衝突，它會列出來讓你決定怎麼處理。
+      <div class="key-point-title">這就是 GitHub 的開源精神</div>
+      原始碼是公開的，任何人都可以看、可以用、可以改。Fork 加上 Pull Request 的機制，讓「眾人協作」能夠有秩序地進行下去：原作者保有最終決定權（要不要合併你的修改），貢獻者也不需要取得特別的權限才能參與。這也正是 GitHub 之所以能成為全世界最大開源社群的核心原因之一。
     </div>
   </section>
 
   <hr class="sep">
 
-  <hr class="sep">
+  <section id="footer" class="section section-resources">
+    <div class="section-number">06</div>
+    <h2>推薦學習資源</h2>
+    <ul class="footer-list">
+      <li><a href="https://gitbook.tw/" target="_blank" rel="noopener noreferrer">高見龍《為你自己學 Git》</a></li>
+      <li><a href="https://skills.github.com/" target="_blank" rel="noopener noreferrer">GitHub 官方教學</a></li>
+    </ul>
+  </section>
 
-  <footer id="footer" class="footer">
-    <p><strong>推薦學習資源</strong><br>
-    高見龍《為你自己學 Git》<br>
-    GitHub 官方互動教學 <code>skills.github.com</code><br><br>
-    這份指南本身就放在 GitHub 上<br>
-    歡迎 Clone 下來學習，或 Fork 一份做成你自己的版本</p>
+  <footer class="page-end">
+    <div class="page-end-mark">✽</div>
+    <p>Crafted by Brian C. · 2026</p>
   </footer>
 
 </div>
@@ -1129,6 +1018,67 @@ window.addEventListener('scroll', () => {
   }
   window.addEventListener('scroll', updateActive, { passive: true });
   updateActive();
+
+  // Panel 開合用 JS 加緩衝，避免 :hover 在 rail 與 panel 縫隙的瞬間 outside 導致選單閃爍
+  let closeTimer = null;
+  toc.addEventListener('mouseenter', () => {
+    clearTimeout(closeTimer);
+    toc.classList.add('is-open');
+  });
+  toc.addEventListener('mouseleave', () => {
+    closeTimer = setTimeout(() => toc.classList.remove('is-open'), 250);
+  });
+})();
+
+// Lightbox：點擊截圖放大，點背景或按 Esc 關閉
+(function setupLightbox() {
+  const triggers = document.querySelectorAll('.repo-screenshot img');
+  if (!triggers.length) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-hidden', 'true');
+
+  const img = document.createElement('img');
+  img.alt = '';
+  overlay.appendChild(img);
+
+  const closeBtn = document.createElement('button');
+  closeBtn.type = 'button';
+  closeBtn.className = 'lightbox-close';
+  closeBtn.setAttribute('aria-label', '關閉');
+  closeBtn.textContent = '×';
+  overlay.appendChild(closeBtn);
+
+  document.body.appendChild(overlay);
+
+  function open(src, alt) {
+    img.src = src;
+    img.alt = alt || '';
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  triggers.forEach(el => {
+    el.addEventListener('click', () => open(el.src, el.alt));
+  });
+
+  // 點背景關閉，但點圖片本身不關
+  overlay.addEventListener('click', (e) => {
+    if (e.target === img) return;
+    close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+  });
 })();
 </script>
 </body>
