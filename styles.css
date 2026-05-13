@@ -1540,6 +1540,13 @@ a:focus-visible, button:focus-visible, .nav-btn:focus-visible {
   .part-divider h2 { font-size: 1.9rem; }
   .toc { padding: 28px 24px; }
 
+  /* 手機版：hero 與 sticky nav 之間的分隔線拿掉，間距收緊 */
+  .hero {
+    border-bottom: none;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+
   /* Sticky nav：pills 在窄螢幕橫向滾動，不擠破版面 */
   .sticky-nav {
     margin: 0 -20px 32px;
